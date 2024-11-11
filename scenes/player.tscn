@@ -296,6 +296,7 @@ bus = &"SFX"
 
 [node name="AudioStreamPlayer_stomp" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("28_hr5p1")
+volume_db = 5.622
 bus = &"SFX"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

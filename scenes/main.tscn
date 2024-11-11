@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cildwkmfa3db3"]
+[gd_scene load_steps=15 format=3 uid="uid://cildwkmfa3db3"]
 
 [ext_resource type="Texture2D" uid="uid://bh2i2pbd72n30" path="res://assets/sprites/GroundBlock.png" id="1_1d7cv"]
 [ext_resource type="Script" path="res://scripts/main_lvl_music.gd" id="1_jv122"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://d3efl6dc471fr" path="res://scenes/goomba.tscn" id="5_rpurm"]
 [ext_resource type="PackedScene" uid="uid://c23eh7cwra8x2" path="res://scenes/pause_menu.tscn" id="6_wiiy2"]
 [ext_resource type="PackedScene" uid="uid://bbpb00d6j2vqi" path="res://scenes/koopa.tscn" id="7_14jb6"]
-[ext_resource type="AudioStream" uid="uid://drtaaaolkg5nd" path="res://assets/sounds/overworld_1.wav" id="10_p1ua8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qbv4q"]
 texture = ExtResource("1_1d7cv")
@@ -71,5 +70,4 @@ position = Vector2(96.5824, 29.7851)
 position = Vector2(-83.3792, 31.5669)
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_p1ua8")
 bus = &"Music"
