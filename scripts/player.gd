@@ -22,21 +22,26 @@ enum Sounds {
 @onready var jump_sound = $AudioStreamPlayer_jumping
 @onready var stomp_sound = $AudioStreamPlayer_stomp
 
-@export_group("Locomotion")
-@export var run_speed_damping = 0.5
-@export var speed = 75.0
-@export var jump_velocity = -400
-@export_group("")
-
-@export_group("Stomping enemies")
-@export var min_stomp_degree = 35
-@export var maxx_stomp_degree = 145
-@export var stomp_y_velocity = -150
-@export_group("")
+#@export_group("Locomotion")
+#@export var run_speed_damping = 0.5
+#@export var speed = 75.0
+#@export var jump_velocity = -400
+#@export_group("")
+#
+#@export_group("Stomping enemies")
+#@export var min_stomp_degree = 35
+#@export var max_stomp_degree = 145
+#@export var stomp_y_velocity = -150
+#@export_group("")
 
 var player_mode = PlayerMode.SMALL
 
 # wye
+@export var speed = 75.0
+@export var jump_velocity = -400
+@export var min_stomp_degree = 35
+@export var max_stomp_degree = 145
+@export var stomp_y_velocity = -150
 
 @export var max_walk_speed: float = 75.0
 @export var max_run_speed: float = 135.0
@@ -125,6 +130,7 @@ func _physics_process(delta):
 #
 #
 func play_sound(sound):
+	print("play sound", sound)
 	if sound == Sounds.JUMP && jump_sound.playing == false:
 		jump_sound.play()
 	if sound == Sounds.STOMP && stomp_sound.playing == false:	
@@ -141,6 +147,15 @@ func handle_enemy_collision(enemy: Enemy):
 		return
 
 	var angle_of_collision = rad_to_deg(position.angle_to_point(enemy.position))
-	if angle_of_collision > min_stomp_degree && maxx_stomp_degree > angle_of_collision:
+	if angle_of_collision > min_stomp_degree && max_stomp_degree > angle_of_collision:
 		enemy.die()
-		play_sound(Sounds.STOMP)
+		on_enemy_stomp()
+	elif !enemy.is_dead:
+		die()
+
+func on_enemy_stomp():
+	play_sound(Sounds.STOMP)
+	velocity.y = stomp_y_velocity
+
+func die():
+	play_sound(Sounds.DIE)

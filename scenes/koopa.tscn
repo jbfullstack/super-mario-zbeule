@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://scripts/koopa.gd" id="1_ixawv"]
 [ext_resource type="Texture2D" uid="uid://rq2r08kewwlo" path="res://assets/sprites/Koopa_Walk1.png" id="2_buefj"]
 [ext_resource type="Texture2D" uid="uid://b2q1ddi7o0ef" path="res://assets/sprites/Koopa_Walk2.png" id="3_j1pnw"]
+[ext_resource type="Shape2D" uid="uid://cni8k0wgnle3p" path="res://resources/collision_shapes/koopa_full_collision_shape.tres" id="5_to4xn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qtnhe"]
 animations = [{
@@ -27,10 +28,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8v41t"]
-size = Vector2(20, 14)
-
 [node name="koopa" type="Area2D"]
+collision_layer = 4
 script = ExtResource("1_ixawv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -39,7 +38,8 @@ animation = &"walk"
 autoplay = "walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_8v41t")
+position = Vector2(0, 0.25)
+shape = ExtResource("5_to4xn")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, 12)

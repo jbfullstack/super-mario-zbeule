@@ -283,6 +283,7 @@ animation = &"big_to_shooting"
 script = ExtResource("3_vueyu")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 4
 
 [node name="AreaCollisionSape" type="CollisionShape2D" parent="Area2D"]
 shape = ExtResource("3_1cmsb")

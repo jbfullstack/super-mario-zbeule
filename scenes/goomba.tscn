@@ -31,6 +31,7 @@ animations = [{
 size = Vector2(15, 16)
 
 [node name="goomba" type="Area2D"]
+collision_layer = 4
 script = ExtResource("1_47qkj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
