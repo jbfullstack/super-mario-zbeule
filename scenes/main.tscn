@@ -1,0 +1,75 @@
+[gd_scene load_steps=16 format=3 uid="uid://cildwkmfa3db3"]
+
+[ext_resource type="Texture2D" uid="uid://bh2i2pbd72n30" path="res://assets/sprites/GroundBlock.png" id="1_1d7cv"]
+[ext_resource type="Script" path="res://scripts/main_lvl_music.gd" id="1_jv122"]
+[ext_resource type="Texture2D" uid="uid://8as4lix1a8pr" path="res://assets/sprites/HardBlock.png" id="2_1vdg3"]
+[ext_resource type="Texture2D" uid="uid://dbhkvad8kmca" path="res://assets/sprites/UndergroundBlock.png" id="3_kj6t6"]
+[ext_resource type="Texture2D" uid="uid://dtkrgfs1x5qrr" path="res://assets/sprites/UndergroundBrick.png" id="4_7aeay"]
+[ext_resource type="PackedScene" uid="uid://c583cac43dgl6" path="res://scenes/player.tscn" id="5_5ysrg"]
+[ext_resource type="PackedScene" uid="uid://d3efl6dc471fr" path="res://scenes/goomba.tscn" id="5_rpurm"]
+[ext_resource type="PackedScene" uid="uid://c23eh7cwra8x2" path="res://scenes/pause_menu.tscn" id="6_wiiy2"]
+[ext_resource type="PackedScene" uid="uid://bbpb00d6j2vqi" path="res://scenes/koopa.tscn" id="7_14jb6"]
+[ext_resource type="AudioStream" uid="uid://dvo03xdboom08" path="res://assets/sounds/overworld_theme.mp3" id="9_buy6l"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qbv4q"]
+texture = ExtResource("1_1d7cv")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ybs7h"]
+texture = ExtResource("2_1vdg3")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_exx18"]
+texture = ExtResource("3_kj6t6")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ma2bd"]
+texture = ExtResource("4_7aeay")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_0ueb1"]
+physics_layer_0/collision_layer = 2
+sources/0 = SubResource("TileSetAtlasSource_qbv4q")
+sources/1 = SubResource("TileSetAtlasSource_ybs7h")
+sources/2 = SubResource("TileSetAtlasSource_exx18")
+sources/3 = SubResource("TileSetAtlasSource_ma2bd")
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_jv122")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_0ueb1")
+format = 2
+layer_0/tile_data = PackedInt32Array(327666, 0, 0, 393202, 0, 0, 458738, 0, 0, 524274, 0, 0, 327667, 0, 0, 393203, 0, 0, 458739, 0, 0, 524275, 0, 0, 327668, 0, 0, 393204, 0, 0, 458740, 0, 0, 524276, 0, 0, 327669, 0, 0, 393205, 0, 0, 458741, 0, 0, 524277, 0, 0, 327670, 0, 0, 393206, 0, 0, 458742, 0, 0, 524278, 0, 0, 327671, 0, 0, 393207, 0, 0, 458743, 0, 0, 524279, 0, 0, 327672, 0, 0, 393208, 0, 0, 458744, 0, 0, 524280, 0, 0, 327673, 0, 0, 393209, 0, 0, 458745, 0, 0, 524281, 0, 0, 327674, 0, 0, 393210, 0, 0, 458746, 0, 0, 524282, 0, 0, 327675, 0, 0, 393211, 0, 0, 458747, 0, 0, 524283, 0, 0, 327676, 0, 0, 393212, 0, 0, 458748, 0, 0, 524284, 0, 0, 327677, 0, 0, 393213, 0, 0, 458749, 0, 0, 524285, 0, 0, 327678, 0, 0, 393214, 0, 0, 458750, 0, 0, 524286, 0, 0, 327679, 0, 0, 393215, 0, 0, 458751, 0, 0, 524287, 0, 0, 262144, 0, 0, 327680, 0, 0, 393216, 0, 0, 458752, 0, 0, 262145, 0, 0, 327681, 0, 0, 393217, 0, 0, 458753, 0, 0, 262146, 0, 0, 327682, 0, 0, 393218, 0, 0, 458754, 0, 0, 262147, 0, 0, 327683, 0, 0, 393219, 0, 0, 458755, 0, 0, 262148, 0, 0, 327684, 0, 0, 393220, 0, 0, 458756, 0, 0, 262149, 0, 0, 327685, 0, 0, 393221, 0, 0, 458757, 0, 0, 262150, 0, 0, 327686, 0, 0, 393222, 0, 0, 458758, 0, 0, 262151, 0, 0, 327687, 0, 0, 393223, 0, 0, 458759, 0, 0, 262152, 0, 0, 327688, 0, 0, 393224, 0, 0, 458760, 0, 0, 262153, 0, 0, 327689, 0, 0, 393225, 0, 0, 458761, 0, 0, 262154, 0, 0, 327690, 0, 0, 393226, 0, 0, 458762, 0, 0, 262155, 0, 0, 327691, 0, 0, 393227, 0, 0, 458763, 0, 0, 262156, 0, 0, 327692, 0, 0, 393228, 0, 0, 458764, 0, 0)
+
+[node name="Player" parent="." instance=ExtResource("5_5ysrg")]
+position = Vector2(-186.723, 43.1486)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.75, 2.75)
+
+[node name="Pause Menu" parent="Camera2D" instance=ExtResource("6_wiiy2")]
+
+[node name="enemies" type="Node" parent="."]
+
+[node name="koopa" parent="enemies" instance=ExtResource("7_14jb6")]
+position = Vector2(96.5824, 29.7851)
+
+[node name="goomba" parent="enemies" instance=ExtResource("5_rpurm")]
+position = Vector2(-83.3792, 31.5669)
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_buy6l")
+bus = &"Music"
