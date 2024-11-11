@@ -7,7 +7,7 @@ func _ready():
 	animation_blur.play("RESET")
 	
 
-func _process(delta):
+func _process(_delta):
 	manage_state()
 
 func resume():

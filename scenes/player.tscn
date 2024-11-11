@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c583cac43dgl6"]
+[gd_scene load_steps=30 format=3 uid="uid://c583cac43dgl6"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_7wjtx"]
 [ext_resource type="Texture2D" uid="uid://ct8uqpacoxaq1" path="res://assets/sprites/Mario_Big_Idle.png" id="2_i8m6y"]
@@ -26,7 +26,8 @@
 [ext_resource type="Texture2D" uid="uid://dlhg7nbxeials" path="res://assets/sprites/Mario_Small_Run2.png" id="22_acdqi"]
 [ext_resource type="Texture2D" uid="uid://d01eopk6c4cx1" path="res://assets/sprites/Mario_Small_Run3.png" id="23_fqws6"]
 [ext_resource type="Texture2D" uid="uid://cal7r48xqmfrt" path="res://assets/sprites/Mario_Small_Slide.png" id="24_dsigq"]
-[ext_resource type="AudioStream" uid="uid://ctr37mjnnt8xp" path="res://assets/sounds/mario_jump.mp3" id="27_ptcv0"]
+[ext_resource type="AudioStream" uid="uid://r58wdfiwyv7q" path="res://assets/sounds/jump.wav" id="27_4avh2"]
+[ext_resource type="AudioStream" uid="uid://brmw5m7qsfb5r" path="res://assets/sounds/stomp.wav" id="28_hr5p1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d3mbw"]
 animations = [{
@@ -273,7 +274,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 3
+collision_mask = 6
 script = ExtResource("1_7wjtx")
 
 [node name="animation" type="AnimatedSprite2D" parent="."]
@@ -290,5 +291,11 @@ shape = ExtResource("3_1cmsb")
 shape = ExtResource("3_1cmsb")
 
 [node name="AudioStreamPlayer_jumping" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("27_ptcv0")
+stream = ExtResource("27_4avh2")
 bus = &"SFX"
+
+[node name="AudioStreamPlayer_stomp" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("28_hr5p1")
+bus = &"SFX"
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

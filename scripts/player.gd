@@ -12,20 +12,26 @@ enum PlayerMode {
 enum Sounds {
 	JUMP,
 	SHOOT,
-	DIE
+	DIE,
+	STOMP
 }
 
 @onready var animation = $animation as PlayerAnimatedSprite
 @onready var area_collision_sape = $Area2D/AreaCollisionSape
 @onready var body_collision_sape = $BodyCollisionSape
 @onready var jump_sound = $AudioStreamPlayer_jumping
-
-
+@onready var stomp_sound = $AudioStreamPlayer_stomp
 
 @export_group("Locomotion")
 @export var run_speed_damping = 0.5
 @export var speed = 200.0
 @export var jump_velocity = -350
+@export_group("")
+
+@export_group("Stomping enemies")
+@export var min_stomp_degree = 35
+@export var maxx_stomp_degree = 145
+@export var stomp_y_velocity = -150
 @export_group("")
 
 var player_mode = PlayerMode.SMALL
@@ -66,3 +72,20 @@ func handle_direction_x(delta):
 func play_sound(sound):
 	if sound == Sounds.JUMP && jump_sound.playing == false:
 		jump_sound.play()
+	if sound == Sounds.STOMP && stomp_sound.playing == false:	
+		stomp_sound.play()
+
+
+func _on_area_2d_area_entered(area):
+	if area is Enemy:
+		handle_enemy_collision(area)
+
+func handle_enemy_collision(enemy: Enemy):
+	if enemy == null:
+		printerr("player collided with null enemy")
+		return
+	
+	var angle_of_collision = rad_to_deg(position.angle_to_point(enemy.position))
+	if angle_of_collision > min_stomp_degree && maxx_stomp_degree > angle_of_collision:
+		enemy.die()
+		play_sound(Sounds.STOMP)
