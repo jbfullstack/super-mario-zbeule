@@ -37,21 +37,21 @@ enum Sounds {
 var player_mode = PlayerMode.SMALL
 
 # wye
-@export var speed = 75.0
-@export var jump_velocity = -400
-@export var min_stomp_degree = 35
-@export var max_stomp_degree = 145
-@export var stomp_y_velocity = -150
+@onready var speed = 75.0
+@onready var jump_velocity = -400
+@onready var min_stomp_degree = 35
+@onready var max_stomp_degree = 145
+@onready var stomp_y_velocity = -150
 
-@export var max_walk_speed: float = 75.0
-@export var max_run_speed: float = 135.0
-@export var max_sprint_speed: float = 135.0
+@onready var max_walk_speed: float = 75.0
+@onready var max_run_speed: float = 135.0
+@onready var max_sprint_speed: float = 135.0
 
-@export var walk_accel: float = 337.5
-@export var stop_decel: float = 225
+@onready var walk_accel: float = 337.5
+@onready var stop_decel: float = 225
 
-@export var p_meter_starting_speed: float = 131.25
-@export var max_p_meter: float = 1.867
+@onready var p_meter_starting_speed: float = 131.25
+@onready var max_p_meter: float = 1.867
 
 var p_meter: float = 0.0
 var facing_dir = -1
@@ -92,8 +92,7 @@ func _physics_process(delta):
 #		else:
 #			#animation run
 	
-	
-	animation.trigger_animation(velocity, direction, player_mode)
+	animation.trigger_animation(velocity, direction, player_mode, ( p_meter == 1.867) )
 	
 	move_and_slide()
 
