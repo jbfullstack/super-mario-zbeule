@@ -20,12 +20,17 @@ enum Sounds {
 
 func _play_music(music: AudioStream, volume = 0.0):
 	print("play music ", music)
-	if background_stream.stream == music:
-		return
-		
-	background_stream.stream = music
-	background_stream.volume_db = volume
-	background_stream.play()
+	if background_stream.stream != music:
+		background_stream.stream = music
+		background_stream.volume_db = volume
+	
+	if !background_stream.playing:
+		background_stream.play()
+
+func stop_music():
+	if background_stream.playing:
+		background_stream.stop()
+	
 	
 func play_overworld_music_level():
 	_play_music(overworld_level_music)

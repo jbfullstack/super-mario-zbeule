@@ -43,7 +43,16 @@ func on_stomp(player_pos: Vector2):
 
 	GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.STOMP)
 	print("da stomp")
-	animated_sprite_2d.play("slide")
+	
 	
 	var movement_direction = 1 if player_pos.x <= global_position.x else -1
 	horizontal_speed = -movement_direction * slide_speed
+
+	if movement_direction == -1:
+		animated_sprite_2d.play_backwards("slide")
+	else:
+		animated_sprite_2d.play("slide")
+
+
+#func _on_visible_on_screen_notifier_2d_screen_exited():
+#	queue_free()

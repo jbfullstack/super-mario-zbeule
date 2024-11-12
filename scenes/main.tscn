@@ -68,6 +68,3 @@ position = Vector2(96.5824, 29.7851)
 
 [node name="goomba" parent="enemies" instance=ExtResource("5_rpurm")]
 position = Vector2(-83.3792, 31.5669)
-
-[node name="Music" type="AudioStreamPlayer" parent="."]
-bus = &"Music"

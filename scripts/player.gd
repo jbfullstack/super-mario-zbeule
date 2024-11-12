@@ -30,6 +30,7 @@ const POINTS_LABEL_SCENE = preload("res://scenes/points_label.tscn")
 #@export_group("")
 
 var player_mode = PlayerMode.SMALL
+var is_dead: bool = false
 
 # wye
 @onready var speed = 75.0
@@ -125,8 +126,8 @@ func _on_area_2d_area_entered(area):
 		handle_enemy_collision(area)
 
 func handle_enemy_collision(enemy: Enemy):
-	if enemy == null:
-		printerr("player collided with null enemy")
+	if enemy == null or is_dead:
+		printerr("player collided with null enemy or player dead")
 		return
 	
 	# manage enemy is Koopa in shell
@@ -153,5 +154,19 @@ func spawn_points_label(enemy: Enemy):
 	points_scored.emit(enemy.get_score())
 
 func die():
-	GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.MARIO_DIE)
-	print("Mario die")
+	if player_mode == PlayerMode.SMALL:
+		is_dead = true
+		GlobalAudioPlayer.stop_music()
+		GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.MARIO_DIE)
+		set_collision_layer_value(1, false)
+		set_physics_process(false)
+		
+		animation.play("death")
+		var death_tween = get_tree().create_tween()
+		death_tween.tween_property(self, "position", position + Vector2(0, -48), .5)
+		death_tween.chain().tween_property(self, "position", position + Vector2(0, 256), 3.5)
+		# TODO: manage menu restart etc..
+		death_tween.tween_callback(func (): get_tree().reload_current_scene())
+		
+	else:
+		print("Mario Bigt o small")
