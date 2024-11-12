@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://cq60ohdp7syyh"]
+
+[ext_resource type="Texture2D" uid="uid://pko5xjk68y8x" path="res://assets/sprites/mario_world/items/brick/default_brick.png" id="1_8nemm"]
+[ext_resource type="Script" path="res://scripts/brick_default.gd" id="1_svcqc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y7teo"]
+size = Vector2(14, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_61u73"]
+size = Vector2(14, 4)
+
+[node name="brick" type="StaticBody2D"]
+collision_layer = 16
+collision_mask = 13
+script = ExtResource("1_svcqc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8nemm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_y7teo")
+
+[node name="bumpArea" type="Area2D" parent="."]
+
+[node name="bumpCollision" type="CollisionShape2D" parent="bumpArea"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_61u73")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, -10)
+collision_mask = 5
+collide_with_areas = true
+
+[connection signal="body_entered" from="bumpArea" to="." method="_on_bump_area_body_entered"]

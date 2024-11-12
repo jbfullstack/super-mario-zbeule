@@ -41,7 +41,7 @@ func die_from_hit():
 	GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.ENEMY_DIE_FROM_HIT)
 	
 	var die_tween = get_tree().create_tween()
-	die_tween.tween_property(self, "position", position + Vector2(0, -25), -2)
+	die_tween.tween_property(self, "position", position + Vector2(0, -25), .2)
 	die_tween.chain().tween_property(self, "position", position + Vector2(0, 500), 4)
 	
 	var points_label = POINTS_LABEL_SCENE.instantiate()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cildwkmfa3db3"]
+[gd_scene load_steps=16 format=3 uid="uid://cildwkmfa3db3"]
 
 [ext_resource type="Texture2D" uid="uid://bh2i2pbd72n30" path="res://assets/sprites/mario_bros/GroundBlock.png" id="1_1d7cv"]
 [ext_resource type="Script" path="res://scripts/main_lvl_music.gd" id="1_jv122"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d3efl6dc471fr" path="res://scenes/goomba.tscn" id="5_rpurm"]
 [ext_resource type="PackedScene" uid="uid://c23eh7cwra8x2" path="res://scenes/pause_menu.tscn" id="6_wiiy2"]
 [ext_resource type="PackedScene" uid="uid://bbpb00d6j2vqi" path="res://scenes/koopa.tscn" id="7_14jb6"]
+[ext_resource type="PackedScene" uid="uid://cq60ohdp7syyh" path="res://scenes/items/brick_default.tscn" id="10_bx4oi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qbv4q"]
 texture = ExtResource("1_1d7cv")
@@ -67,4 +68,11 @@ zoom = Vector2(2.75, 2.75)
 position = Vector2(96.5824, 29.7851)
 
 [node name="goomba" parent="enemies" instance=ExtResource("5_rpurm")]
-position = Vector2(-83.3792, 31.5669)
+position = Vector2(-129, -19)
+horizontal_speed = 0
+
+[node name="koopa2" parent="enemies" instance=ExtResource("7_14jb6")]
+position = Vector2(16, 26)
+
+[node name="brick" parent="." instance=ExtResource("10_bx4oi")]
+position = Vector2(-127, 7)
