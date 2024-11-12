@@ -5,29 +5,28 @@ func trigger_animation(velocity: Vector2, direction: int, player_mode: Player.Pl
 	var animation_prefix = Player.PlayerMode.keys()[player_mode].to_snake_case()
 	
 	if not get_parent().is_on_floor():
+		if velocity.y < 0:
+			play("%s_jump" % animation_prefix)
 		#TODO: jump / fall
-		#if velocity.y > 0
-			# fall
 		# else
-			#jump
-		play("%s_jump" % animation_prefix)
+			#fall
+		
 	
 	# handle slide animation	
 	elif sign(velocity.x) != sign(direction) && velocity.x != 0 && direction !=0:
 		play("%s_slide" % animation_prefix)
 		scale.x = direction
 	
+	else:
+		# handle run and idle animations
+		if velocity.x != 0:
+			play("%s_run" % animation_prefix)
+		else:
+			play("%s_idle" % animation_prefix)
+
+
 	# handle the sprite direction
-	else:
-		if scale.x == 1 && sign(velocity.x) == -1:
-			scale.x = -1
-		elif scale.x == -1 && sign(velocity.x) == 1:
-			scale.x = 1
-			
-			
-	
-	# handle run and idle animations
-	if velocity.x != 0:
-		play("%s_run" % animation_prefix)
-	else:
-		play("%s_idle" % animation_prefix)
+	if scale.x == 1 && sign(velocity.x) == -1:
+		scale.x = -1
+	elif scale.x == -1 && sign(velocity.x) == 1:
+		scale.x = 1
