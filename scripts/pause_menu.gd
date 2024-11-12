@@ -4,8 +4,7 @@ class_name PauseMenu
 @onready var animation_blur = $AnimationBlur
 
 func _ready():
-	animation_blur.play("RESET")
-	
+	animation_blur.play("RESET")	
 
 func _process(_delta):
 	manage_state()
@@ -15,8 +14,10 @@ func resume():
 	animation_blur.play_backwards("blur")
 	
 func pause():
+	GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.PAUSE)
 	get_tree().paused = true
 	animation_blur.play("blur")
+	
 
 func manage_state():
 	

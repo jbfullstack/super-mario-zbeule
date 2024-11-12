@@ -28,7 +28,6 @@ func die():
 #	vertical_speed = 0
 	animated_sprite_2d.play("dead")
 	GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.STOMP)
-	print("dead stomp")
 
 func die_from_hit():
 	set_collision_layer_value(3, false)

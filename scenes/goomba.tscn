@@ -28,7 +28,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4wn0"]
-size = Vector2(15, 16)
+size = Vector2(15, 17)
 
 [node name="goomba" type="Area2D"]
 collision_layer = 4
@@ -41,7 +41,7 @@ animation = &"walk"
 autoplay = "walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0)
+position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_s4wn0")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]

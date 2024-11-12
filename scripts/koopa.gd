@@ -30,7 +30,6 @@ func die():
 		collision_shape_2d.set_deferred("position", KOOPA_SHELL_COLL_SHAPE_POSITION)
 		ray_cast_2d.target_position = Vector2(0, 8)
 		isInShell = true
-	print("CollisionShape2D Position after die():", collision_shape_2d.position)
 
 
 func get_score():
@@ -41,9 +40,7 @@ func on_stomp(player_pos: Vector2):
 	set_collision_layer_value(3, false)
 	set_collision_layer_value(4, true)
 
-	GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.STOMP)
-	print("da stomp")
-	
+	GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.STOMP)	
 	
 	var movement_direction = 1 if player_pos.x <= global_position.x else -1
 	horizontal_speed = -movement_direction * slide_speed

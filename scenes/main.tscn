@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cildwkmfa3db3"]
+[gd_scene load_steps=19 format=3 uid="uid://cildwkmfa3db3"]
 
 [ext_resource type="Texture2D" uid="uid://bh2i2pbd72n30" path="res://assets/sprites/mario_bros/GroundBlock.png" id="1_1d7cv"]
 [ext_resource type="Script" path="res://scripts/main_lvl_music.gd" id="1_jv122"]
@@ -10,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://c23eh7cwra8x2" path="res://scenes/pause_menu.tscn" id="6_wiiy2"]
 [ext_resource type="PackedScene" uid="uid://bbpb00d6j2vqi" path="res://scenes/koopa.tscn" id="7_14jb6"]
 [ext_resource type="PackedScene" uid="uid://cq60ohdp7syyh" path="res://scenes/items/brick_default.tscn" id="10_bx4oi"]
+[ext_resource type="PackedScene" uid="uid://ve4nb2u5rv3h" path="res://scenes/items/block_mistery.tscn" id="11_ra1oj"]
+[ext_resource type="Script" path="res://scripts/levelManager.gd" id="12_6gtwf"]
+[ext_resource type="PackedScene" uid="uid://db4y572gxedcp" path="res://scenes/items/coin_collectable.tscn" id="12_q31i0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qbv4q"]
 texture = ExtResource("1_1d7cv")
@@ -54,13 +57,18 @@ tile_set = SubResource("TileSet_0ueb1")
 format = 2
 layer_0/tile_data = PackedInt32Array(327666, 0, 0, 393202, 0, 0, 458738, 0, 0, 524274, 0, 0, 327667, 0, 0, 393203, 0, 0, 458739, 0, 0, 524275, 0, 0, 327668, 0, 0, 393204, 0, 0, 458740, 0, 0, 524276, 0, 0, 327669, 0, 0, 393205, 0, 0, 458741, 0, 0, 524277, 0, 0, 327670, 0, 0, 393206, 0, 0, 458742, 0, 0, 524278, 0, 0, 327671, 0, 0, 393207, 0, 0, 458743, 0, 0, 524279, 0, 0, 327672, 0, 0, 393208, 0, 0, 458744, 0, 0, 524280, 0, 0, 327673, 0, 0, 393209, 0, 0, 458745, 0, 0, 524281, 0, 0, 327674, 0, 0, 393210, 0, 0, 458746, 0, 0, 524282, 0, 0, 327675, 0, 0, 393211, 0, 0, 458747, 0, 0, 524283, 0, 0, 327676, 0, 0, 393212, 0, 0, 458748, 0, 0, 524284, 0, 0, 327677, 0, 0, 393213, 0, 0, 458749, 0, 0, 524285, 0, 0, 327678, 0, 0, 393214, 0, 0, 458750, 0, 0, 524286, 0, 0, 327679, 0, 0, 393215, 0, 0, 458751, 0, 0, 524287, 0, 0, 262144, 0, 0, 327680, 0, 0, 393216, 0, 0, 458752, 0, 0, 262145, 0, 0, 327681, 0, 0, 393217, 0, 0, 458753, 0, 0, 262146, 0, 0, 327682, 0, 0, 393218, 0, 0, 458754, 0, 0, 262147, 0, 0, 327683, 0, 0, 393219, 0, 0, 458755, 0, 0, 262148, 0, 0, 327684, 0, 0, 393220, 0, 0, 458756, 0, 0, 262149, 0, 0, 327685, 0, 0, 393221, 0, 0, 458757, 0, 0, 262150, 0, 0, 327686, 0, 0, 393222, 0, 0, 458758, 0, 0, 262151, 0, 0, 327687, 0, 0, 393223, 0, 0, 458759, 0, 0, 262152, 0, 0, 327688, 0, 0, 393224, 0, 0, 458760, 0, 0, 262153, 0, 0, 327689, 0, 0, 393225, 0, 0, 458761, 0, 0, 262154, 0, 0, 327690, 0, 0, 393226, 0, 0, 458762, 0, 0, 262155, 0, 0, 327691, 0, 0, 393227, 0, 0, 458763, 0, 0, 262156, 0, 0, 327692, 0, 0, 393228, 0, 0, 458764, 0, 0)
 
-[node name="Player" parent="." instance=ExtResource("5_5ysrg")]
-position = Vector2(-186.723, 43.1486)
-
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.75, 2.75)
 
 [node name="Pause Menu" parent="Camera2D" instance=ExtResource("6_wiiy2")]
+
+[node name="blocks" type="Node" parent="."]
+
+[node name="brick" parent="blocks" instance=ExtResource("10_bx4oi")]
+position = Vector2(-127, 7)
+
+[node name="mysteryBlock" parent="blocks" instance=ExtResource("11_ra1oj")]
+position = Vector2(-111, 7)
 
 [node name="enemies" type="Node" parent="."]
 
@@ -68,11 +76,29 @@ zoom = Vector2(2.75, 2.75)
 position = Vector2(96.5824, 29.7851)
 
 [node name="goomba" parent="enemies" instance=ExtResource("5_rpurm")]
-position = Vector2(-129, -19)
+position = Vector2(-112, -17)
 horizontal_speed = 0
 
 [node name="koopa2" parent="enemies" instance=ExtResource("7_14jb6")]
 position = Vector2(16, 26)
 
-[node name="brick" parent="." instance=ExtResource("10_bx4oi")]
-position = Vector2(-127, 7)
+[node name="goomba2" parent="enemies" instance=ExtResource("5_rpurm")]
+position = Vector2(-129, -17)
+horizontal_speed = 0
+
+[node name="Player" parent="." instance=ExtResource("5_5ysrg")]
+position = Vector2(-186.723, 43.1486)
+
+[node name="coins" type="Node" parent="."]
+
+[node name="CollectableCoin" parent="coins" instance=ExtResource("12_q31i0")]
+position = Vector2(-89, 47)
+
+[node name="CollectableCoin2" parent="coins" instance=ExtResource("12_q31i0")]
+position = Vector2(-70, 47)
+
+[node name="CollectableCoin3" parent="coins" instance=ExtResource("12_q31i0")]
+position = Vector2(-79, 28)
+
+[node name="levelManager" type="Node" parent="." groups=["level_manager"]]
+script = ExtResource("12_6gtwf")
