@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+signal points_scored(points: int)
+
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 enum PlayerMode {
@@ -9,18 +11,11 @@ enum PlayerMode {
 	SHOOTING
 }
 
-enum Sounds {
-	JUMP,
-	SHOOT,
-	DIE,
-	STOMP
-}
+const POINTS_LABEL_SCENE = preload("res://scenes/points_label.tscn")
 
 @onready var animation = $animation as PlayerAnimatedSprite
 @onready var area_collision_sape = $Area2D/AreaCollisionSape
 @onready var body_collision_sape = $BodyCollisionSape
-@onready var jump_sound = $AudioStreamPlayer_jumping
-@onready var stomp_sound = $AudioStreamPlayer_stomp
 
 #@export_group("Locomotion")
 #@export var run_speed_damping = 0.5
@@ -63,7 +58,7 @@ func _physics_process(delta):
 
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
-		play_sound(Sounds.JUMP)
+		GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.JUMP)
 		
 	if Input.is_action_just_released("jump") and velocity.y < 0:
 		velocity.y *= 0.5
@@ -85,12 +80,6 @@ func _physics_process(delta):
 		
 	else:
 		velocity.x = move_toward(velocity.x, 0, stop_decel * delta)
-		
-#	if velocity.x:
-#		if p_meter == 1.867:
-#			# animation walk
-#		else:
-#			#animation run
 	
 	animation.trigger_animation(velocity, direction, player_mode, ( p_meter == 1.867) )
 	
@@ -128,12 +117,7 @@ func _physics_process(delta):
 	
 #
 #
-func play_sound(sound):
-	print("play sound", sound)
-	if sound == Sounds.JUMP && jump_sound.playing == false:
-		jump_sound.play()
-	if sound == Sounds.STOMP && stomp_sound.playing == false:	
-		stomp_sound.play()
+
 #
 #
 func _on_area_2d_area_entered(area):
@@ -144,17 +128,30 @@ func handle_enemy_collision(enemy: Enemy):
 	if enemy == null:
 		printerr("player collided with null enemy")
 		return
-
-	var angle_of_collision = rad_to_deg(position.angle_to_point(enemy.position))
-	if angle_of_collision > min_stomp_degree && max_stomp_degree > angle_of_collision:
-		enemy.die()
-		on_enemy_stomp()
-	elif !enemy.is_dead:
-		die()
+	
+	# manage enemy is Koopa in shell
+	if is_instance_of(enemy, Koopa) and (enemy as Koopa).isInShell:
+		enemy.on_stomp(global_position)
+		spawn_points_label(enemy)
+	else:
+		var angle_of_collision = rad_to_deg(position.angle_to_point(enemy.position))
+		if angle_of_collision > min_stomp_degree && max_stomp_degree > angle_of_collision:
+			enemy.die()
+			on_enemy_stomp()
+			spawn_points_label(enemy)
+		elif !enemy.is_dead:
+			die()
 
 func on_enemy_stomp():
-	play_sound(Sounds.STOMP)
 	velocity.y = stomp_y_velocity
 
+func spawn_points_label(enemy: Enemy):
+	var points_label = POINTS_LABEL_SCENE.instantiate()
+	points_label.set_score_value(enemy.get_score())
+	points_label.position = enemy.position + Vector2(-20, -20)
+	get_tree().root.add_child(points_label)
+	points_scored.emit(enemy.get_score())
+
 func die():
-	play_sound(Sounds.DIE)
+	GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.MARIO_DIE)
+	print("Mario die")
