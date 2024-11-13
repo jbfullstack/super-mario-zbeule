@@ -187,6 +187,17 @@ func eat_mushroom_red_from_mistery_block():
 		GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.POWER_UP)
 		animation.play("small_to_big")
 		set_collision_shape(false)
+		
+func eat_flower_from_mistery_block():
+	set_physics_process(false)
+	is_touchable = false
+	set_collision_layer_value(1, false)
+	GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.POWER_UP)
+	if player_mode == PlayerMode.SMALL:
+		animation.play("small_to_shooting")
+	elif player_mode == PlayerMode.BIG:
+		animation.play("big_to_shooting")
+	set_collision_shape(false)
 
 func set_collision_shape(is_small: bool):
 	var collision_shape = SMALL_MARIO_COLL_SHAPE if is_small else BIG_MARIO_COLL_SHAPE

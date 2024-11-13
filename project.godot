@@ -22,6 +22,7 @@ GlobalAudioPlayer="*res://scenes/audio_player.tscn"
 [display]
 
 window/stretch/mode="canvas_items"
+mouse_cursor/custom_image="res://assets/sprites/mario_world/menu/cursor.png"
 
 [input]
 

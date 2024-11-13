@@ -70,18 +70,19 @@ position = Vector2(-127, 7)
 
 [node name="mysteryBlock" parent="blocks" instance=ExtResource("11_ra1oj")]
 position = Vector2(-112, 7)
+bonus_type = 2
 
 [node name="enemies" type="Node" parent="."]
 
 [node name="koopa" parent="enemies" instance=ExtResource("7_14jb6")]
-position = Vector2(134, 23)
+position = Vector2(145, -37)
 
 [node name="goomba" parent="enemies" instance=ExtResource("5_rpurm")]
-position = Vector2(-112, -17)
+position = Vector2(198, -86)
 horizontal_speed = 0
 
 [node name="koopa2" parent="enemies" instance=ExtResource("7_14jb6")]
-position = Vector2(178, 26)
+position = Vector2(178, -38)
 
 [node name="Player" parent="." instance=ExtResource("5_5ysrg")]
 position = Vector2(-186.723, 43.1486)
@@ -89,16 +90,16 @@ position = Vector2(-186.723, 43.1486)
 [node name="coins" type="Node" parent="."]
 
 [node name="CollectableCoin" parent="coins" instance=ExtResource("12_q31i0")]
-position = Vector2(-89, 47)
+position = Vector2(-128, -16)
 
 [node name="CollectableCoin2" parent="coins" instance=ExtResource("12_q31i0")]
-position = Vector2(-70, 47)
+position = Vector2(-112, -16)
 
 [node name="CollectableCoin3" parent="coins" instance=ExtResource("12_q31i0")]
-position = Vector2(-79, 28)
+position = Vector2(-120, -32)
 
 [node name="levelManager" type="Node" parent="." groups=["level_manager"]]
 script = ExtResource("12_6gtwf")
 
 [node name="yoshiCoin" parent="." instance=ExtResource("14_fallm")]
-position = Vector2(-160, 41)
+position = Vector2(-120, -64)

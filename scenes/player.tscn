@@ -1,8 +1,6 @@
 [gd_scene load_steps=36 format=3 uid="uid://c583cac43dgl6"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_7wjtx"]
-[ext_resource type="Texture2D" uid="uid://ct8uqpacoxaq1" path="res://assets/sprites/mario_bros/Mario_Big_Idle.png" id="2_i8m6y"]
-[ext_resource type="Texture2D" uid="uid://d3jwm15et3t22" path="res://assets/sprites/mario_bros/Mario_Small_Idle.png" id="2_kdgji"]
 [ext_resource type="Texture2D" uid="uid://x2bttb4yxc1c" path="res://assets/sprites/mario_world/mario/big/mario_big_fall.png" id="2_mjify"]
 [ext_resource type="Shape2D" uid="uid://c8aylm0k0qc10" path="res://resources/collision_shapes/small_mario_collision_shape.tres" id="3_1cmsb"]
 [ext_resource type="Texture2D" uid="uid://chtnih2f2npny" path="res://assets/sprites/mario_world/mario/big/mario_big_idle.png" id="3_bgfr1"]
@@ -16,22 +14,24 @@
 [ext_resource type="Texture2D" uid="uid://ugx1dv5u8m74" path="res://assets/sprites/mario_bros/Mario-Shooting.png" id="10_v8jh8"]
 [ext_resource type="Texture2D" uid="uid://ejmsfackoim" path="res://assets/sprites/mario_world/mario/big/mario_big_walk1.png" id="11_6e68y"]
 [ext_resource type="Texture2D" uid="uid://orvwm3d3pktq" path="res://assets/sprites/mario_world/mario/small/mario_small_death2.png" id="11_6eaah"]
-[ext_resource type="Texture2D" uid="uid://4axg8se7m40x" path="res://assets/sprites/mario_bros/Mario_Shooting_Idle.png" id="11_iywvm"]
-[ext_resource type="Texture2D" uid="uid://d3i8ain3y4vfj" path="res://assets/sprites/mario_bros/Mario_Shooting_Jump.png" id="12_tux7j"]
 [ext_resource type="Texture2D" uid="uid://7n4u8mc6usc5" path="res://assets/sprites/mario_world/mario/big/mario_big_walk2.png" id="12_waitm"]
 [ext_resource type="Texture2D" uid="uid://sroey0brch4t" path="res://assets/sprites/mario_world/mario/big/mario_big_walk3.png" id="13_8fl1n"]
 [ext_resource type="Texture2D" uid="uid://cwns46e1wprcc" path="res://assets/sprites/mario_bros/Mario_Shooting_Pole.png" id="13_fhhws"]
-[ext_resource type="Texture2D" uid="uid://bsfrxav8x3dot" path="res://assets/sprites/mario_bros/Mario_Shooting_Run1.png" id="14_15dvl"]
-[ext_resource type="Texture2D" uid="uid://cipjmquw1tlrv" path="res://assets/sprites/mario_bros/Mario_Shooting_Run2.png" id="15_cfbli"]
-[ext_resource type="Texture2D" uid="uid://daqnle02fss6v" path="res://assets/sprites/mario_bros/Mario_Shooting_Run3.png" id="16_q4pd8"]
-[ext_resource type="Texture2D" uid="uid://1w6lqgnlyqo2" path="res://assets/sprites/mario_bros/Mario_Shooting-Slide.png" id="17_i307y"]
+[ext_resource type="Texture2D" uid="uid://bdkypm1vh82pn" path="res://assets/sprites/mario_world/mario/fire/mario_fire_fall.png" id="17_cbtjl"]
+[ext_resource type="Texture2D" uid="uid://chjpedqocfg77" path="res://assets/sprites/mario_world/mario/fire/mario_fire_idle.png" id="18_e6p1d"]
 [ext_resource type="Texture2D" uid="uid://sht1sgrju7hu" path="res://assets/sprites/mario_world/mario/small/mario_small_fall.png" id="18_kgsx7"]
 [ext_resource type="Texture2D" uid="uid://ddjfer30tjtb7" path="res://assets/sprites/mario_world/mario/small/mario_small_idle.png" id="19_eeosf"]
+[ext_resource type="Texture2D" uid="uid://dt4ei0w1ltm5" path="res://assets/sprites/mario_world/mario/fire/mario_fire_jump.png" id="19_wy51b"]
 [ext_resource type="Texture2D" uid="uid://de46s4um186x6" path="res://assets/sprites/mario_world/mario/small/mario_small_jump.png" id="20_bn4uo"]
 [ext_resource type="Texture2D" uid="uid://ckd7ka2h150dt" path="res://assets/sprites/mario_bros/Mario_Small_Pole.png" id="20_wfwb4"]
+[ext_resource type="Texture2D" uid="uid://lgj5bmtr1rd5" path="res://assets/sprites/mario_world/mario/fire/mario_fire_run1.png" id="21_nvi77"]
+[ext_resource type="Texture2D" uid="uid://bbf82tmv2488a" path="res://assets/sprites/mario_world/mario/fire/mario_fire_run2.png" id="22_ctold"]
 [ext_resource type="Texture2D" uid="uid://lxms3uadfq4u" path="res://assets/sprites/mario_world/mario/small/mario_small_run1.png" id="22_qwe1f"]
+[ext_resource type="Texture2D" uid="uid://bwa4kqxwp5m1s" path="res://assets/sprites/mario_world/mario/fire/mario_fire_slide.png" id="23_1j87u"]
 [ext_resource type="Texture2D" uid="uid://356r2f3wtfjm" path="res://assets/sprites/mario_world/mario/small/mario_small_run2.png" id="23_xn3r6"]
 [ext_resource type="Texture2D" uid="uid://dsjebl2fxdk4" path="res://assets/sprites/mario_world/mario/small/mario_small_slide.png" id="24_1qx3f"]
+[ext_resource type="Texture2D" uid="uid://crekgf7aa436h" path="res://assets/sprites/mario_world/mario/fire/mario_fire_walk1.png" id="24_yg4qg"]
+[ext_resource type="Texture2D" uid="uid://cq5lqscflau3y" path="res://assets/sprites/mario_world/mario/fire/mario_fire_walk2.png" id="25_5r7an"]
 [ext_resource type="Texture2D" uid="uid://vki16sij0fey" path="res://assets/sprites/mario_world/mario/small/mario_small_walk1.png" id="26_keake"]
 [ext_resource type="Texture2D" uid="uid://d20uo3w25m6ii" path="res://assets/sprites/mario_world/mario/small/mario_small_walk2.png" id="27_b7sq6"]
 
@@ -90,30 +90,30 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_i8m6y")
+"texture": ExtResource("3_bgfr1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_iywvm")
+"texture": ExtResource("18_e6p1d")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_i8m6y")
+"texture": ExtResource("3_bgfr1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_iywvm")
+"texture": ExtResource("18_e6p1d")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_i8m6y")
+"texture": ExtResource("3_bgfr1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_iywvm")
+"texture": ExtResource("18_e6p1d")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_i8m6y")
+"texture": ExtResource("3_bgfr1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_iywvm")
+"texture": ExtResource("18_e6p1d")
 }],
-"loop": true,
+"loop": false,
 "name": &"big_to_shooting",
 "speed": 5.0
 }, {
@@ -153,14 +153,17 @@ animations = [{
 "name": &"shoot",
 "speed": 10.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_cbtjl")
+}],
 "loop": true,
 "name": &"shooting_fall",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("11_iywvm")
+"texture": ExtResource("18_e6p1d")
 }],
 "loop": true,
 "name": &"shooting_idle",
@@ -168,7 +171,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("12_tux7j")
+"texture": ExtResource("19_wy51b")
 }],
 "loop": true,
 "name": &"shooting_jump",
@@ -184,13 +187,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("14_15dvl")
+"texture": ExtResource("18_e6p1d")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_cfbli")
+"texture": ExtResource("21_nvi77")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_q4pd8")
+"texture": ExtResource("22_ctold")
 }],
 "loop": true,
 "name": &"shooting_run",
@@ -198,16 +201,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("17_i307y")
+"texture": ExtResource("23_1j87u")
 }],
 "loop": true,
 "name": &"shooting_slide",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("24_yg4qg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_5r7an")
+}],
 "loop": true,
 "name": &"shooting_walk",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -291,30 +300,30 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_kdgji")
+"texture": ExtResource("19_eeosf")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_iywvm")
+"texture": ExtResource("18_e6p1d")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_kdgji")
+"texture": ExtResource("19_eeosf")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_iywvm")
+"texture": ExtResource("18_e6p1d")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_kdgji")
+"texture": ExtResource("19_eeosf")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_iywvm")
+"texture": ExtResource("18_e6p1d")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_kdgji")
+"texture": ExtResource("19_eeosf")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_iywvm")
+"texture": ExtResource("18_e6p1d")
 }],
-"loop": true,
+"loop": false,
 "name": &"small_to_shooting",
 "speed": 5.0
 }, {
@@ -336,7 +345,7 @@ script = ExtResource("1_7wjtx")
 
 [node name="animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_d3mbw")
-animation = &"big_idle"
+animation = &"small_to_big"
 script = ExtResource("3_vueyu")
 
 [node name="Area2D" type="Area2D" parent="."]

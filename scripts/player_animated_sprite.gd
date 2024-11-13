@@ -52,6 +52,20 @@ func _on_animation_finished():
 				get_parent().player_mode = Player.PlayerMode.SMALL
 			Player.PlayerMode.SMALL:
 				get_parent().player_mode = Player.PlayerMode.BIG
+	elif animation == "small_to_shooting":
+		reset_player_properties()
+		match get_parent().player_mode:
+			Player.PlayerMode.SHOOTING:
+				get_parent().player_mode = Player.PlayerMode.SMALL
+			Player.PlayerMode.SMALL:
+				get_parent().player_mode = Player.PlayerMode.SHOOTING
+	elif animation == "big_to_shooting":
+		reset_player_properties()
+		match get_parent().player_mode:
+			Player.PlayerMode.SHOOTING:
+				get_parent().player_mode = Player.PlayerMode.BIG
+			Player.PlayerMode.BIG:
+				get_parent().player_mode = Player.PlayerMode.SHOOTING
 		
 func reset_player_properties():
 	offset = Vector2.ZERO

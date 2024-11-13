@@ -9,12 +9,12 @@ enum BonusType {
 }
 
 #Bonus References
-const COIN_SCENE = preload("res://Scenes/coin.tscn")
-const SHROOM_SCENE = preload("res://Scenes/shroom.tscn")
-const SHOOTING_FLOWER_SCENE = preload("res://Scenes/shooting_flower.tscn")
+const COIN_SCENE = preload("res://scenes/items/coin.tscn")
+const SHROOM_SCENE = preload("res://scenes/items/shroom_mistery_block.tscn")
+const SHOOTING_FLOWER_SCENE = preload("res://scenes/items/shooting_flower.tscn")
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
-@export var bonus_type: BonusType = BonusType.COIN
+@export var bonus_type: BonusType = BonusType.SHROOM
 @export var invisible: bool = false
 
 var is_empty = false
