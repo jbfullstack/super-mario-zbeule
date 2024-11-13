@@ -146,7 +146,10 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 2.0,
+"duration": 1.0,
+"texture": ExtResource("17_cbtjl")
+}, {
+"duration": 1.0,
 "texture": ExtResource("15_jpd02")
 }],
 "loop": false,
@@ -357,6 +360,9 @@ shape = ExtResource("3_1cmsb")
 
 [node name="BodyCollisionSape" type="CollisionShape2D" parent="."]
 shape = ExtResource("3_1cmsb")
+
+[node name="FireBallSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(8, -2)
 
 [connection signal="animation_finished" from="animation" to="animation" method="_on_animation_finished"]
 [connection signal="frame_changed" from="animation" to="animation" method="_on_frame_changed"]

@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://5pdt51rt4y74"]
+
+[ext_resource type="Script" path="res://scripts/fire_ball.gd" id="1_6sci2"]
+[ext_resource type="Texture2D" uid="uid://c135f55fbxgm3" path="res://assets/sprites/mario_bros/fireball1.png" id="2_0mh77"]
+[ext_resource type="Texture2D" uid="uid://hiugutq3ty4p" path="res://assets/sprites/mario_bros/fireball2.png" id="3_x07n8"]
+[ext_resource type="Texture2D" uid="uid://bdgbfwhb1nnqe" path="res://assets/sprites/mario_bros/fireball3.png" id="4_8ej5c"]
+[ext_resource type="Texture2D" uid="uid://dhyiy4t3j3xga" path="res://assets/sprites/mario_bros/fireball4.png" id="5_ayp6v"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5ef4b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0mh77")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_x07n8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8ej5c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ayp6v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_utb8a"]
+radius = 4.0
+
+[node name="FireBall" type="Area2D"]
+collision_mask = 20
+script = ExtResource("1_6sci2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5ef4b")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_utb8a")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 5)
+collision_mask = 19
+collide_with_areas = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

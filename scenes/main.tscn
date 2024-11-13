@@ -11,8 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://bbpb00d6j2vqi" path="res://scenes/koopa.tscn" id="7_14jb6"]
 [ext_resource type="PackedScene" uid="uid://cq60ohdp7syyh" path="res://scenes/items/brick_default.tscn" id="10_bx4oi"]
 [ext_resource type="PackedScene" uid="uid://ve4nb2u5rv3h" path="res://scenes/items/block_mistery.tscn" id="11_ra1oj"]
-[ext_resource type="Script" path="res://scripts/levelManager.gd" id="12_6gtwf"]
 [ext_resource type="PackedScene" uid="uid://db4y572gxedcp" path="res://scenes/items/coin_collectable.tscn" id="12_q31i0"]
+[ext_resource type="Script" path="res://scripts/level_manager.gd" id="13_7neyk"]
 [ext_resource type="PackedScene" uid="uid://oc8msym3vsb8" path="res://scenes/items/coin_yoshi.tscn" id="14_fallm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qbv4q"]
@@ -102,7 +102,7 @@ position = Vector2(-112, -16)
 position = Vector2(-120, -32)
 
 [node name="levelManager" type="Node" parent="." groups=["level_manager"]]
-script = ExtResource("12_6gtwf")
+script = ExtResource("13_7neyk")
 
 [node name="yoshiCoin" parent="." instance=ExtResource("14_fallm")]
 position = Vector2(-120, -64)

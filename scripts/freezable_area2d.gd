@@ -5,11 +5,11 @@ class_name FreezableArea2D
 
 var is_animation_paused = false
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if handle_game_freeze():
 		return
 			
-func _process(delta):
+func _process(_delta):
 	if handle_game_freeze():
 		return
 		

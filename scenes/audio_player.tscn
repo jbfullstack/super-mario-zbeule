@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cdg1pus5i5p5b"]
+[gd_scene load_steps=14 format=3 uid="uid://cdg1pus5i5p5b"]
 
 [ext_resource type="Script" path="res://scripts/audio_player.gd" id="1_o6gaf"]
 [ext_resource type="AudioStream" uid="uid://r58wdfiwyv7q" path="res://assets/sounds/jump.wav" id="2_bmuho"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://g245gxaydhno" path="res://assets/sounds/pause.mp3" id="10_qu16s"]
 [ext_resource type="AudioStream" uid="uid://coap6rddskmmr" path="res://assets/sounds/power_down.wav" id="11_oj81s"]
 [ext_resource type="AudioStream" uid="uid://qb73b7epeyqv" path="res://assets/sounds/smw_power-up_appears.wav" id="12_8o80a"]
+[ext_resource type="AudioStream" uid="uid://cosu3hk41ucda" path="res://assets/sounds/fireball.wav" id="13_g2omg"]
 
 [node name="Node" type="Node"]
 process_mode = 3
@@ -65,4 +66,8 @@ bus = &"SFX"
 
 [node name="AudioStreamPlayer_shroom_appears" type="AudioStreamPlayer2D" parent="sfx"]
 stream = ExtResource("12_8o80a")
+bus = &"SFX"
+
+[node name="AudioStreamPlayer_fireball" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource("13_g2omg")
 bus = &"SFX"

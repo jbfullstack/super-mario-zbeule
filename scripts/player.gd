@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-signal points_scored(points: int)
+#signal points_scored(points: int)
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -11,13 +11,16 @@ enum PlayerMode {
 	SHOOTING
 }
 
-const POINTS_LABEL_SCENE = preload("res://scenes/points_label.tscn")
+#const POINTS_LABEL_SCENE = preload("res://scenes/points_label.tscn")
 const BIG_MARIO_COLL_SHAPE = preload("res://resources/collision_shapes/big_mario_collision_shape.tres")
 const SMALL_MARIO_COLL_SHAPE = preload("res://resources/collision_shapes/small_mario_collision_shape.tres")
+const FIRE_BALL_SCENE = preload("res://scenes/fire_ball.tscn")
 
 @onready var animation = $animation as PlayerAnimatedSprite
 @onready var area_collision_sape = $Area2D/AreaCollisionSape
 @onready var body_collision_sape = $BodyCollisionSape
+@onready var fire_ball_spawn_point = $FireBallSpawnPoint
+
 
 #@export_group("Locomotion")
 #@export var run_speed_damping = 0.5
@@ -110,25 +113,25 @@ func handle_enemy_collision(enemy: Enemy):
 	# manage enemy is Koopa in shell
 	if is_instance_of(enemy, Koopa) and (enemy as Koopa).isInShell:
 		enemy.on_stomp(global_position)
-		spawn_points_label(enemy)
+		get_tree().get_first_node_in_group("level_manager").spawn_points_label(enemy)
 	else:
 		var angle_of_collision = rad_to_deg(position.angle_to_point(enemy.position))
 		if angle_of_collision > min_stomp_degree && max_stomp_degree > angle_of_collision:
 			enemy.die()
 			on_enemy_stomp()
-			spawn_points_label(enemy)
+			get_tree().get_first_node_in_group("level_manager").spawn_points_label(enemy)
 		elif !enemy.is_dead:
 			die()
 
 func on_enemy_stomp():
 	velocity.y = stomp_y_velocity
 
-func spawn_points_label(enemy: Enemy):
-	var points_label = POINTS_LABEL_SCENE.instantiate()
-	points_label.set_score_value(enemy.get_score())
-	points_label.position = enemy.position + Vector2(-20, -20)
-	get_tree().root.add_child(points_label)
-	points_scored.emit(enemy.get_score())
+#func spawn_points_label(enemy: Enemy):
+#	var points_label = POINTS_LABEL_SCENE.instantiate()
+#	points_label.set_score_value(enemy.get_score())
+#	points_label.position = enemy.position + Vector2(-20, -20)
+#	get_tree().root.add_child(points_label)
+#	points_scored.emit(enemy.get_score())
 
 func die():
 	if player_mode == PlayerMode.SMALL:
@@ -190,6 +193,11 @@ func shoot():
 #	set_physics_process(false)
 	velocity.y =0
 	animation.play_shoot()
+	GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.FIRE)
+	var fireball = FIRE_BALL_SCENE.instantiate()
+	fireball.direction = sign(animation.scale.x)
+	fireball.global_position = fire_ball_spawn_point.global_position
+	get_tree().root.add_child(fireball)
 	
 func freeze_game():
 	pass
