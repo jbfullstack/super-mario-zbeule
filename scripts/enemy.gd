@@ -1,5 +1,5 @@
-extends Area2D
-class_name  Enemy
+extends FreezableArea2D
+class_name Enemy
 
 const POINTS_LABEL_SCENE = preload("res://scenes/points_label.tscn")
 
@@ -7,21 +7,15 @@ const POINTS_LABEL_SCENE = preload("res://scenes/points_label.tscn")
 @export var vertical_speed = 100
 
 @onready var ray_cast_2d = $RayCast2D as RayCast2D
-@onready var animated_sprite_2d = $AnimatedSprite2D as AnimatedSprite2D
 
 @export var is_dead = false
-
 
 
 func get_score():
 	return 100
 
-func _physics_process(delta):
-	if GlobalGameState.is_frozen:
-		return
-		
 func _process(delta):
-	if GlobalGameState.is_frozen:
+	if handle_game_freeze():
 		return
 		
 	position.x -= delta * horizontal_speed
@@ -57,4 +51,3 @@ func die_from_hit():
 func _on_area_entered(area):
 	if area is Koopa and area.isInShell and area.horizontal_speed != 0:
 		self.die_from_hit()
-		

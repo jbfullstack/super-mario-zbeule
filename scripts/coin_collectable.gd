@@ -1,7 +1,5 @@
-extends Area2D
+extends Bonus
 class_name CoinCollectable
-
-@onready var animated_sprite_2d = $AnimatedSprite2D as AnimatedSprite2D
 
 func _on_body_entered(body):
 	if body is Player:
