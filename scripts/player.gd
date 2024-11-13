@@ -67,6 +67,9 @@ func _physics_process(delta):
 		
 	if Input.is_action_just_released("jump") and velocity.y < 0:
 		velocity.y *= 0.5
+		
+	if Input.is_action_just_pressed("shoot") and player_mode == PlayerMode.SHOOTING and !animation.is_shooting:
+		shoot()
 
 	var direction = Input.get_axis("left", "right")
 	if is_on_floor() and abs(velocity.x) >= p_meter_starting_speed and Input.is_action_pressed("shoot"):
@@ -87,44 +90,10 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, stop_decel * delta)
 	
 	animation.trigger_animation(velocity, direction, player_mode, ( p_meter == 1.867) )
-	
+
 	move_and_slide()
 
-#
-#func _physics_process(delta):
-#	# Add the gravity.
-#	if not is_on_floor():
-#		velocity.y += gravity * delta
-#
-#	handle_jump()
-#
-#	handle_direction_x(delta)
-#
-#	move_and_slide()
-#
-#
-#func handle_jump():
-#	if Input.is_action_just_pressed("jump") and is_on_floor():
-#		velocity.y = jump_velocity
-#		play_sound(Sounds.JUMP)
-#
-#	# Manage short jump if jump btn released	
-#	if Input.is_action_just_released("jump") and velocity.y < 0:
-#		velocity.y *= 0.5
-#
-#func handle_direction_x(delta):
-#	var direction = Input.get_axis("left", "right")
-#	if direction:
-#		velocity.x = lerp(velocity.x, speed * direction, run_speed_damping * delta)
-#	else:
-#		velocity.x = move_toward(velocity.x, 0, speed * delta)
 
-	
-#
-#
-
-#
-#
 func _on_area_2d_area_entered(area):
 	if area is Enemy:
 		handle_enemy_collision(area)
@@ -213,3 +182,20 @@ func big_to_small():
 	var animation_name = "small_to_big" if player_mode == PlayerMode.BIG else "small_to_shooting"
 	set_collision_shape(true)
 	animation.play(animation_name, 1.0, true)
+	
+	
+func shoot():
+	print("shoot")
+#	set_physics_process(false)
+	velocity.y =0
+	animation.play_shoot()
+	
+func freeze_game():
+	var freeze_timer = Timer.new()
+	freeze_timer.connect("timeout", self, "on_freeze_timeout")
+	freeze_timer.set_wait_time(0.075) # time in seconds
+	add_child(freeze_timer)
+	timer.start()
+
+func on_freeze_timeout():
+	get_tree().paused = false

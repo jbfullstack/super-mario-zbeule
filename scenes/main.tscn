@@ -66,11 +66,14 @@ zoom = Vector2(2.75, 2.75)
 [node name="blocks" type="Node" parent="."]
 
 [node name="brick" parent="blocks" instance=ExtResource("10_bx4oi")]
-position = Vector2(-127, 7)
+position = Vector2(-120, 8)
 
 [node name="mysteryBlock" parent="blocks" instance=ExtResource("11_ra1oj")]
-position = Vector2(-112, 7)
+position = Vector2(-104, 8)
 bonus_type = 2
+
+[node name="mysteryBlock2" parent="blocks" instance=ExtResource("11_ra1oj")]
+position = Vector2(-136, 8)
 
 [node name="enemies" type="Node" parent="."]
 

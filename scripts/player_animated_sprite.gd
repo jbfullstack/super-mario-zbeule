@@ -3,39 +3,38 @@ class_name  PlayerAnimatedSprite
 
 var frame_count = 0
 
+var is_shooting = false
+
 func trigger_animation(velocity: Vector2, direction: int, player_mode: Player.PlayerMode, is_runing: bool):
 	var animation_prefix = Player.PlayerMode.keys()[player_mode].to_snake_case()
-	var isSliging: bool = false
 	
-	if not get_parent().is_on_floor():
-		if velocity.y < 0:
-			play("%s_jump" % animation_prefix)
-		else:
-			play("%s_fall" % animation_prefix)
-			
-		#TODO: jump / fall
-		# else
-			#fall
-		
+	var isSliding: bool = false
 	
-	# handle slide animation	
-	elif sign(velocity.x) != sign(direction) && velocity.x != 0 && direction !=0:
-		play("%s_slide" % animation_prefix)
-		isSliging = true
-	
-	else:
-		# handle run and idle animations
-		if velocity.x != 0:
-			if !is_runing:
-				play("%s_walk" % animation_prefix)
+	if !is_shooting:
+		if not get_parent().is_on_floor():
+			if velocity.y < 0:
+				play("%s_jump" % animation_prefix)
 			else:
-				play("%s_run" % animation_prefix)
+				play("%s_fall" % animation_prefix)
+		
+		# handle slide animation	
+		elif sign(velocity.x) != sign(direction) && velocity.x != 0 && direction !=0:
+			play("%s_slide" % animation_prefix)
+			isSliding = true
+		
 		else:
-			play("%s_idle" % animation_prefix)
+			# handle run and idle animations
+			if velocity.x != 0:
+				if !is_runing:
+					play("%s_walk" % animation_prefix)
+				else:
+					play("%s_run" % animation_prefix)
+			else:
+				play("%s_idle" % animation_prefix)
 
 
 	# handle the sprite direction
-	if !isSliging:
+	if !isSliding:
 		if scale.x == 1 && sign(velocity.x) == -1:
 			scale.x = -1
 		elif scale.x == -1 && sign(velocity.x) == 1:
@@ -43,8 +42,12 @@ func trigger_animation(velocity: Vector2, direction: int, player_mode: Player.Pl
 	else:
 		scale.x = direction
 
+func play_shoot():
+	is_shooting = true
+	get_parent().animation.play("shoot")
 
 func _on_animation_finished():
+	print("finished: ", animation)
 	if animation == "small_to_big":
 		reset_player_properties()
 		match get_parent().player_mode:
@@ -66,6 +69,12 @@ func _on_animation_finished():
 				get_parent().player_mode = Player.PlayerMode.BIG
 			Player.PlayerMode.BIG:
 				get_parent().player_mode = Player.PlayerMode.SHOOTING
+	elif animation == "shoot":
+		print("shooting terminated")
+		is_shooting = false
+#		get_parent().set_physics_process(true)
+		play("shooting_idle")
+
 		
 func reset_player_properties():
 	offset = Vector2.ZERO

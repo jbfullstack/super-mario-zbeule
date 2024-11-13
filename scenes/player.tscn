@@ -11,12 +11,12 @@
 [ext_resource type="Texture2D" uid="uid://pu3tvdpetn88" path="res://assets/sprites/mario_world/mario/big/mario_big_run2.png" id="7_voti7"]
 [ext_resource type="Texture2D" uid="uid://bbnosf3cemoes" path="res://assets/sprites/mario_world/mario/big/mario_big_slide.png" id="8_k58q6"]
 [ext_resource type="Texture2D" uid="uid://be0mu70d4bs4c" path="res://assets/sprites/mario_world/mario/small/mario_small_death1.png" id="10_anqqo"]
-[ext_resource type="Texture2D" uid="uid://ugx1dv5u8m74" path="res://assets/sprites/mario_bros/Mario-Shooting.png" id="10_v8jh8"]
 [ext_resource type="Texture2D" uid="uid://ejmsfackoim" path="res://assets/sprites/mario_world/mario/big/mario_big_walk1.png" id="11_6e68y"]
 [ext_resource type="Texture2D" uid="uid://orvwm3d3pktq" path="res://assets/sprites/mario_world/mario/small/mario_small_death2.png" id="11_6eaah"]
 [ext_resource type="Texture2D" uid="uid://7n4u8mc6usc5" path="res://assets/sprites/mario_world/mario/big/mario_big_walk2.png" id="12_waitm"]
 [ext_resource type="Texture2D" uid="uid://sroey0brch4t" path="res://assets/sprites/mario_world/mario/big/mario_big_walk3.png" id="13_8fl1n"]
 [ext_resource type="Texture2D" uid="uid://cwns46e1wprcc" path="res://assets/sprites/mario_bros/Mario_Shooting_Pole.png" id="13_fhhws"]
+[ext_resource type="Texture2D" uid="uid://1l08vdw8equh" path="res://assets/sprites/mario_world/mario/fire/mario_fire_shoot.png" id="15_jpd02"]
 [ext_resource type="Texture2D" uid="uid://bdkypm1vh82pn" path="res://assets/sprites/mario_world/mario/fire/mario_fire_fall.png" id="17_cbtjl"]
 [ext_resource type="Texture2D" uid="uid://chjpedqocfg77" path="res://assets/sprites/mario_world/mario/fire/mario_fire_idle.png" id="18_e6p1d"]
 [ext_resource type="Texture2D" uid="uid://sht1sgrju7hu" path="res://assets/sprites/mario_world/mario/small/mario_small_fall.png" id="18_kgsx7"]
@@ -146,8 +146,8 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("10_v8jh8")
+"duration": 2.0,
+"texture": ExtResource("15_jpd02")
 }],
 "loop": false,
 "name": &"shoot",
@@ -345,7 +345,8 @@ script = ExtResource("1_7wjtx")
 
 [node name="animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_d3mbw")
-animation = &"small_to_big"
+animation = &"shoot"
+autoplay = "small_idle"
 script = ExtResource("3_vueyu")
 
 [node name="Area2D" type="Area2D" parent="."]
