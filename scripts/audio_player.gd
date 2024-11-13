@@ -12,6 +12,10 @@ class_name AudioPlayer
 @onready var audio_stream_player_coin = $sfx/AudioStreamPlayer_coin
 @onready var audio_stream_player_yoshi_coin = $sfx/AudioStreamPlayer_yoshi_coin
 
+@onready var audio_stream_player_power_down = $sfx/AudioStreamPlayer_power_down
+@onready var audio_stream_player_shroom_appears = $sfx/AudioStreamPlayer_shroom_appears
+
+
 
 const overworld_level_music = preload("res://assets/sounds/overworld_1.wav")
 
@@ -23,6 +27,8 @@ enum Sounds {
 	ENEMY_DIE_FROM_HIT,
 	BLOCK_HIT,
 	POWER_UP,
+	POWER_DOWN,
+	SHROOM_APPEARS,
 	COIN,
 	YOSHI_COIN,
 	PAUSE
@@ -45,7 +51,6 @@ func play_overworld_music_level():
 	_play_music(overworld_level_music)
 
 func play_sound(sound: Sounds):
-	print("play sound", sound)
 	if sound == Sounds.JUMP && audio_stream_player_jumping.playing == false:
 		audio_stream_player_jumping.play()
 	if sound == Sounds.STOMP:
@@ -58,6 +63,10 @@ func play_sound(sound: Sounds):
 		audio_stream_player_block_hit.play()
 	if sound == Sounds.POWER_UP && audio_stream_player_power_up.playing == false:
 		audio_stream_player_power_up.play()
+	if sound == Sounds.POWER_DOWN && audio_stream_player_power_down.playing == false:
+		audio_stream_player_power_down.play()
+	if sound == Sounds.SHROOM_APPEARS:
+		audio_stream_player_shroom_appears.play()
 	if sound == Sounds.COIN:
 		audio_stream_player_coin.play()
 	if sound == Sounds.YOSHI_COIN:

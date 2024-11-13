@@ -69,23 +69,19 @@ zoom = Vector2(2.75, 2.75)
 position = Vector2(-127, 7)
 
 [node name="mysteryBlock" parent="blocks" instance=ExtResource("11_ra1oj")]
-position = Vector2(-111, 7)
+position = Vector2(-112, 7)
 
 [node name="enemies" type="Node" parent="."]
 
 [node name="koopa" parent="enemies" instance=ExtResource("7_14jb6")]
-position = Vector2(96.5824, 29.7851)
+position = Vector2(134, 23)
 
 [node name="goomba" parent="enemies" instance=ExtResource("5_rpurm")]
 position = Vector2(-112, -17)
 horizontal_speed = 0
 
 [node name="koopa2" parent="enemies" instance=ExtResource("7_14jb6")]
-position = Vector2(16, 26)
-
-[node name="goomba2" parent="enemies" instance=ExtResource("5_rpurm")]
-position = Vector2(-129, -17)
-horizontal_speed = 0
+position = Vector2(178, 26)
 
 [node name="Player" parent="." instance=ExtResource("5_5ysrg")]
 position = Vector2(-186.723, 43.1486)

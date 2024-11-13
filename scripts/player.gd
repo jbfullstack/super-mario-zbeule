@@ -12,6 +12,8 @@ enum PlayerMode {
 }
 
 const POINTS_LABEL_SCENE = preload("res://scenes/points_label.tscn")
+const BIG_MARIO_COLL_SHAPE = preload("res://resources/collision_shapes/big_mario_collision_shape.tres")
+const SMALL_MARIO_COLL_SHAPE = preload("res://resources/collision_shapes/small_mario_collision_shape.tres")
 
 @onready var animation = $animation as PlayerAnimatedSprite
 @onready var area_collision_sape = $Area2D/AreaCollisionSape
@@ -31,6 +33,8 @@ const POINTS_LABEL_SCENE = preload("res://scenes/points_label.tscn")
 
 var player_mode = PlayerMode.SMALL
 var is_dead: bool = false
+var is_invisible: bool = false
+var is_touchable:bool = true
 
 # wye
 @onready var speed = 75.0
@@ -129,6 +133,10 @@ func handle_enemy_collision(enemy: Enemy):
 	if enemy == null or is_dead:
 		printerr("player collided with null enemy or player dead")
 		return
+		
+	if !is_touchable:
+		printerr("playernot touchable")
+		return
 	
 	# manage enemy is Koopa in shell
 	if is_instance_of(enemy, Koopa) and (enemy as Koopa).isInShell:
@@ -169,4 +177,28 @@ func die():
 		death_tween.tween_callback(func (): get_tree().reload_current_scene())
 		
 	else:
-		print("Mario Bigt o small")
+		big_to_small()
+
+func eat_mushroom_red_from_mistery_block():
+	if player_mode == PlayerMode.SMALL:
+		set_physics_process(false)
+		is_touchable = false
+		set_collision_layer_value(1, false)
+		GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.POWER_UP)
+		animation.play("small_to_big")
+		set_collision_shape(false)
+
+func set_collision_shape(is_small: bool):
+	var collision_shape = SMALL_MARIO_COLL_SHAPE if is_small else BIG_MARIO_COLL_SHAPE
+	area_collision_sape.set_deferred("shape", collision_shape)
+	body_collision_sape.set_deferred("shape", collision_shape)
+
+func big_to_small():
+	print("Mario Big to small")
+	GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.POWER_DOWN)
+	set_collision_layer_value(1, false)
+	set_physics_process(false)
+	is_touchable = false
+	var animation_name = "small_to_big" if player_mode == PlayerMode.BIG else "small_to_shooting"
+	set_collision_shape(true)
+	animation.play(animation_name, 1.0, true)

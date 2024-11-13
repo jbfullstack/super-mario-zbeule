@@ -9,9 +9,10 @@ enum BonusType {
 
 # Bonus references
 const COIN_SCENE = preload("res://scenes/items/coin.tscn")
+const SHROOM_SCENE = preload("res://scenes/items/shroom_mistery_block.tscn")
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
-@export var bonus_type: BonusType = BonusType.COIN
+@export var bonus_type: BonusType = BonusType.SHROOM
 @export var invisible: bool = false
 
 var is_empty: bool = false
@@ -55,7 +56,9 @@ func spawn_coin():
 	get_tree().get_first_node_in_group("level_manager").on_coin_collected()
 	
 func spawn_shroom():
-	print("shroom")
+	var shroom = SHROOM_SCENE.instantiate()
+	shroom.global_position = global_position
+	get_tree().root.call_deferred("add_child", shroom)
 
 func spawn_flower():
 	print("flower")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cdg1pus5i5p5b"]
+[gd_scene load_steps=13 format=3 uid="uid://cdg1pus5i5p5b"]
 
 [ext_resource type="Script" path="res://scripts/audio_player.gd" id="1_o6gaf"]
 [ext_resource type="AudioStream" uid="uid://r58wdfiwyv7q" path="res://assets/sounds/jump.wav" id="2_bmuho"]
@@ -10,6 +10,8 @@
 [ext_resource type="AudioStream" uid="uid://dff1ly2ni6ob1" path="res://assets/sounds/smw_coin.wav" id="8_yu75u"]
 [ext_resource type="AudioStream" uid="uid://b1gulximwcdd3" path="res://assets/sounds/yoshi_coin.wav" id="9_atk70"]
 [ext_resource type="AudioStream" uid="uid://g245gxaydhno" path="res://assets/sounds/pause.mp3" id="10_qu16s"]
+[ext_resource type="AudioStream" uid="uid://coap6rddskmmr" path="res://assets/sounds/power_down.wav" id="11_oj81s"]
+[ext_resource type="AudioStream" uid="uid://qb73b7epeyqv" path="res://assets/sounds/smw_power-up_appears.wav" id="12_8o80a"]
 
 [node name="Node" type="Node"]
 process_mode = 3
@@ -56,3 +58,11 @@ bus = &"SFX"
 
 [node name="AudioStreamPlayer_pause" type="AudioStreamPlayer2D" parent="sfx"]
 stream = ExtResource("10_qu16s")
+
+[node name="AudioStreamPlayer_power_down" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource("11_oj81s")
+bus = &"SFX"
+
+[node name="AudioStreamPlayer_shroom_appears" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource("12_8o80a")
+bus = &"SFX"
