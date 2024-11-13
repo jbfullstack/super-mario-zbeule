@@ -16,12 +16,7 @@ var isInShell = false
 func _ready():
 	ray_cast_2d.exclude_parent = true
 	collision_shape_2d.shape = KOOPA_FULL_COLL_SHAPE
-	
-func _process(delta):
-	position.x -= delta * horizontal_speed
-	
-	if !ray_cast_2d.is_colliding():
-		position.y += delta * vertical_speed
+
 
 func die():
 	if !isInShell:

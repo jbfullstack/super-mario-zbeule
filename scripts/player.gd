@@ -150,38 +150,39 @@ func die():
 
 func eat_mushroom_red_from_mistery_block():
 	if player_mode == PlayerMode.SMALL:
-		set_physics_process(false)
-		is_touchable = false
-		set_collision_layer_value(1, false)
-		GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.POWER_UP)
+		handle_player_transformation(true)
 		animation.play("small_to_big")
-		set_collision_shape(false)
 		
 func eat_flower_from_mistery_block():
-	set_physics_process(false)
-	is_touchable = false
-	set_collision_layer_value(1, false)
-	GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.POWER_UP)
+	handle_player_transformation(true)
 	if player_mode == PlayerMode.SMALL:
 		animation.play("small_to_shooting")
 	elif player_mode == PlayerMode.BIG:
 		animation.play("big_to_shooting")
-	set_collision_shape(false)
+	
+func big_to_small():
+	print("Mario Big to small")
+	handle_player_transformation(false)
+	var animation_name = "small_to_big" if player_mode == PlayerMode.BIG else "small_to_shooting"
+	animation.play(animation_name, 1.0, true)
+	
+func handle_player_transformation(power_up: bool):
+	GlobalGameState.freeze()
+	set_physics_process(false)
+	is_touchable = false
+	set_collision_layer_value(1, false)	
+	
+	if power_up:
+		GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.POWER_UP)
+	else:
+		GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.POWER_DOWN)
+		
+	set_collision_shape(!power_up)
 
 func set_collision_shape(is_small: bool):
 	var collision_shape = SMALL_MARIO_COLL_SHAPE if is_small else BIG_MARIO_COLL_SHAPE
 	area_collision_sape.set_deferred("shape", collision_shape)
 	body_collision_sape.set_deferred("shape", collision_shape)
-
-func big_to_small():
-	print("Mario Big to small")
-	GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.POWER_DOWN)
-	set_collision_layer_value(1, false)
-	set_physics_process(false)
-	is_touchable = false
-	var animation_name = "small_to_big" if player_mode == PlayerMode.BIG else "small_to_shooting"
-	set_collision_shape(true)
-	animation.play(animation_name, 1.0, true)
 	
 	
 func shoot():
@@ -191,11 +192,4 @@ func shoot():
 	animation.play_shoot()
 	
 func freeze_game():
-	var freeze_timer = Timer.new()
-	freeze_timer.connect("timeout", self, "on_freeze_timeout")
-	freeze_timer.set_wait_time(0.075) # time in seconds
-	add_child(freeze_timer)
-	timer.start()
-
-func on_freeze_timeout():
-	get_tree().paused = false
+	pass

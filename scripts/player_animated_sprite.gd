@@ -55,6 +55,7 @@ func _on_animation_finished():
 				get_parent().player_mode = Player.PlayerMode.SMALL
 			Player.PlayerMode.SMALL:
 				get_parent().player_mode = Player.PlayerMode.BIG
+		GlobalGameState.unfreeze()
 	elif animation == "small_to_shooting":
 		reset_player_properties()
 		match get_parent().player_mode:
@@ -62,6 +63,7 @@ func _on_animation_finished():
 				get_parent().player_mode = Player.PlayerMode.SMALL
 			Player.PlayerMode.SMALL:
 				get_parent().player_mode = Player.PlayerMode.SHOOTING
+		GlobalGameState.unfreeze()
 	elif animation == "big_to_shooting":
 		reset_player_properties()
 		match get_parent().player_mode:
@@ -69,6 +71,7 @@ func _on_animation_finished():
 				get_parent().player_mode = Player.PlayerMode.BIG
 			Player.PlayerMode.BIG:
 				get_parent().player_mode = Player.PlayerMode.SHOOTING
+		GlobalGameState.unfreeze()
 	elif animation == "shoot":
 		print("shooting terminated")
 		is_shooting = false

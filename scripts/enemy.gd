@@ -15,8 +15,15 @@ const POINTS_LABEL_SCENE = preload("res://scenes/points_label.tscn")
 
 func get_score():
 	return 100
-	
+
+func _physics_process(delta):
+	if GlobalGameState.is_frozen:
+		return
+		
 func _process(delta):
+	if GlobalGameState.is_frozen:
+		return
+		
 	position.x -= delta * horizontal_speed
 	
 	if !ray_cast_2d.is_colliding():

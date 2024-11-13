@@ -12,7 +12,14 @@ var allow_horizontal_movement = false
 var is_eatable = false
 var vertical_speed = 0
 
+func _physics_process(delta):
+	if GlobalGameState.is_frozen:
+		return
+		
 func _process(delta):
+	if GlobalGameState.is_frozen:
+		return
+		
 	if allow_horizontal_movement:
 		position.x += delta * horizontal_speed
 		
