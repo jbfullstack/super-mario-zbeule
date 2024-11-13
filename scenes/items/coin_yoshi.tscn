@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://oc8msym3vsb8"]
+
+[ext_resource type="Script" path="res://scripts/yoshi_coin.gd" id="1_u38ci"]
+[ext_resource type="Texture2D" uid="uid://drbhspihds5rq" path="res://assets/sprites/mario_world/items/coin/yoshi_coin1.png" id="2_ugofk"]
+[ext_resource type="Texture2D" uid="uid://baajdegb75sww" path="res://assets/sprites/mario_world/items/coin/yoshi_coin2.png" id="3_61ios"]
+[ext_resource type="Texture2D" uid="uid://dmy1ft31df00v" path="res://assets/sprites/mario_world/items/coin/yoshi_coin3.png" id="4_7so70"]
+[ext_resource type="Texture2D" uid="uid://cmmn0kaoo78pv" path="res://assets/sprites/mario_world/items/coin/yoshi_coin4.png" id="5_bwp8a"]
+[ext_resource type="Texture2D" uid="uid://c14d4hvowebk5" path="res://assets/sprites/mario_world/items/coin/yoshi_coin5.png" id="6_8giot"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ynh4x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ugofk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_61ios")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7so70")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bwp8a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8giot")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_unkab"]
+radius = 9.0
+height = 24.0
+
+[node name="yoshiCoin" type="Area2D"]
+collision_layer = 33
+script = ExtResource("1_u38ci")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ynh4x")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_unkab")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
