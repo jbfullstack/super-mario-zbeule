@@ -1,13 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://cq60ohdp7syyh"]
+[gd_scene load_steps=7 format=3 uid="uid://cq60ohdp7syyh"]
 
 [ext_resource type="Texture2D" uid="uid://pko5xjk68y8x" path="res://assets/sprites/mario_world/items/brick/default_brick.png" id="1_8nemm"]
 [ext_resource type="Script" path="res://scripts/brick_default.gd" id="1_svcqc"]
+[ext_resource type="Texture2D" uid="uid://co3bdq1m4vg4f" path="res://assets/sprites/mario_bros/Brick.png" id="3_17bd0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y7teo"]
 size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_61u73"]
 size = Vector2(14, 4)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qada4"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+particle_flag_disable_z = true
+flatness = 1.0
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+linear_accel_max = 100.0
+radial_accel_max = 100.0
+tangential_accel_max = 10.0
+angle_min = -180.0
+angle_max = 180.0
+scale_min = 0.25
+scale_max = 0.25
 
 [node name="brick" type="StaticBody2D"]
 collision_layer = 16
@@ -30,5 +47,12 @@ shape = SubResource("RectangleShape2D_61u73")
 target_position = Vector2(0, -10)
 collision_mask = 5
 collide_with_areas = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_qada4")
+texture = ExtResource("3_17bd0")
+one_shot = true
+speed_scale = 2.0
 
 [connection signal="body_entered" from="bumpArea" to="." method="_on_bump_area_body_entered"]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5f5l4216u27l"]
+
+[ext_resource type="Script" path="res://scripts/debug/camera_mouvement_debug.gd" id="1_35hbt"]
+
+[node name="camera_mouvements_debug" type="Node2D"]
+script = ExtResource("1_35hbt")

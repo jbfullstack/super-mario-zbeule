@@ -16,6 +16,11 @@ const BIG_MARIO_COLL_SHAPE = preload("res://resources/collision_shapes/big_mario
 const SMALL_MARIO_COLL_SHAPE = preload("res://resources/collision_shapes/small_mario_collision_shape.tres")
 const FIRE_BALL_SCENE = preload("res://scenes/fire_ball.tscn")
 
+#@export_group("camera sync")
+#@export var camera_sync: Camera2D
+#@export var should_camera_sync: bool = true
+#@export_group("")
+
 @onready var animation = $animation as PlayerAnimatedSprite
 @onready var area_collision_sape = $Area2D/AreaCollisionSape
 @onready var body_collision_sape = $BodyCollisionSape
@@ -92,10 +97,18 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, stop_decel * delta)
 	
-	animation.trigger_animation(velocity, direction, player_mode, ( p_meter == 1.867) )
+	animation.trigger_animation(velocity, direction, player_mode, is_p_meter() )
 
 	move_and_slide()
 
+#func _process(delta):
+#	# camera sync
+#	if should_camera_sync:
+#		if global_position.x > camera_sync.global_position.x:
+#			camera_sync.global_position.x = global_position.x
+
+func is_p_meter():
+	return ( p_meter >= max_p_meter)
 
 func _on_area_2d_area_entered(area):
 	if area is Enemy:
@@ -107,7 +120,7 @@ func handle_enemy_collision(enemy: Enemy):
 		return
 		
 	if !is_touchable:
-		printerr("playernot touchable")
+		printerr("player collided with enemy but player not touchable")
 		return
 	
 	# manage enemy is Koopa in shell
@@ -198,6 +211,4 @@ func shoot():
 	fireball.direction = sign(animation.scale.x)
 	fireball.global_position = fire_ball_spawn_point.global_position
 	get_tree().root.add_child(fireball)
-	
-func freeze_game():
-	pass
+
