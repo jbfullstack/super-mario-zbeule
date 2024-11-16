@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cildwkmfa3db3"]
+[gd_scene load_steps=23 format=3 uid="uid://cildwkmfa3db3"]
 
 [ext_resource type="Texture2D" uid="uid://bh2i2pbd72n30" path="res://assets/sprites/mario_bros/GroundBlock.png" id="1_1d7cv"]
 [ext_resource type="Script" path="res://scripts/main_lvl_music.gd" id="1_jv122"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://db4y572gxedcp" path="res://scenes/items/coin_collectable.tscn" id="12_q31i0"]
 [ext_resource type="Script" path="res://scripts/level_manager.gd" id="13_7neyk"]
 [ext_resource type="PackedScene" uid="uid://oc8msym3vsb8" path="res://scenes/items/coin_yoshi.tscn" id="14_fallm"]
+[ext_resource type="PackedScene" uid="uid://b36a5v7tdeqeb" path="res://scenes/items/pipes/green_pipe.tscn" id="17_g403c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qbv4q"]
 texture = ExtResource("1_1d7cv")
@@ -120,3 +121,12 @@ script = ExtResource("13_7neyk")
 
 [node name="yoshiCoin" parent="." instance=ExtResource("14_fallm")]
 position = Vector2(-120, -64)
+
+[node name="pipe2" parent="." instance=ExtResource("17_g403c")]
+position = Vector2(112, -16)
+
+[node name="pipe2" parent="pipe2" instance=ExtResource("17_g403c")]
+position = Vector2(-360, 184)
+
+[node name="pipe1" parent="." instance=ExtResource("17_g403c")]
+position = Vector2(37.229, 16)

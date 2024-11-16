@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://3itaw2vr0pdn"]
+
+[ext_resource type="Script" path="res://scripts/debug/pipe_mouvement_debug.gd" id="1_rjk7l"]
+
+[node name="pipe_mouvements_debug" type="Node2D"]
+script = ExtResource("1_rjk7l")

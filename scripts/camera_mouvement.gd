@@ -50,6 +50,8 @@ func _ready():
 #	global_position = player.global_position
 	h_direction = sign(player.velocity.x)
 	h_change_pos = player.global_position.x
+	
+	zoom = Vector2(1.0, 1.0)
 
 func _process(delta):
 	if player == null:
