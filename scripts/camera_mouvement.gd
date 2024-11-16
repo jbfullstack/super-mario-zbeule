@@ -15,6 +15,8 @@ var h_change_pos = 0.0       # Position where the player changed direction
 var h_buffer = 50         # Pixel buffer before the camera moves after direction change
 var camera_edge_margin = 80         # Pixel buffer before the camera moves after direction change
 
+var zoom_grain = 0.01
+
 # Vertical movement variables
 var is_camera_unlocked_vertically = false
 var viewport_height = 0.0
@@ -56,6 +58,9 @@ func _ready():
 func _process(delta):
 	if player == null:
 		return
+		
+	handle_zoom()
+		
 	update_horizontal_camera(delta)
 	update_vertical_camera(delta)
 
@@ -124,6 +129,21 @@ func handle_vertical_camera_locked_mouvement():
 	elif target_camera_y != last_player_y_pos_before_jump - third_tiers_of_viewport_height / 2 :
 		target_camera_y = last_player_y_pos_before_jump - third_tiers_of_viewport_height / 2 
 		
+func handle_zoom():
+	var zoomed = false
+	
+	if Input.is_action_pressed("zoom_in"):
+		zoom.x += zoom_grain
+		zoom.y += zoom_grain
+		zoomed = true
+	elif Input.is_action_pressed("zoom_out"):
+		zoom.x -= zoom_grain
+		zoom.y -= zoom_grain
+		zoomed = true
+	
+	if zoomed:
+		viewport_width = get_viewport_rect().size.x / zoom.x
+		viewport_height = get_viewport_rect().size.y  / zoom.y
 
 func PRINT(msg: String):
 	if debug:

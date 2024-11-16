@@ -8,11 +8,11 @@ var sizey: float
 var color: Color
 var default_font : Font = ThemeDB.fallback_font;
 
-func _draw_camera_zone(posx: float, posy: float, sizex: float, sizey: float, c: Color):
-	self.x = posx
-	self.y = posy
-	self.size_x = sizex
-	self.size_y = sizey
+func _draw_camera_zone(px: float, py: float, sx: float, sy: float, c: Color):
+	self.posx = posx
+	self.posx = posy
+	self.sizex = sizex
+	self.sizey = sizey
 	self.color = c
 	queue_redraw()  # Schedule a redraw
 
