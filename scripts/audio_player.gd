@@ -15,6 +15,7 @@ class_name AudioPlayer
 @onready var audio_stream_player_power_down = $sfx/AudioStreamPlayer_power_down
 @onready var audio_stream_player_shroom_appears = $sfx/AudioStreamPlayer_shroom_appears
 @onready var audio_stream_player_fireball = $sfx/AudioStreamPlayer_fireball
+@onready var audio_stream_player_enter_pipe = $sfx/AudioStreamPlayer_enter_pipe
 
 
 
@@ -28,6 +29,7 @@ enum Sounds {
 	STOMP,
 	FIRE,
 	ENEMY_DIE_FROM_HIT,
+	ENTER_PIPE,
 	BLOCK_HIT,
 	POWER_UP,
 	POWER_DOWN,
@@ -62,6 +64,8 @@ func play_sound(sound: Sounds):
 		audio_stream_player_mario_die.play()
 	if sound == Sounds.ENEMY_DIE_FROM_HIT:
 		audio_stream_player_enemy_die_from_hit.play()
+	if sound == Sounds.ENTER_PIPE:
+		audio_stream_player_enter_pipe.play()
 	if sound == Sounds.FIRE:
 		audio_stream_player_fireball.play()
 	if sound == Sounds.BLOCK_HIT && audio_stream_player_block_hit.playing == false:

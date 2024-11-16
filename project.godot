@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GlobalAudioPlayer="*res://scenes/audio_player.tscn"
 GlobalGameState="*res://scripts/game_state.gd"
+LevelNamesManager="*res://scripts/structures/level_names_manager.gd"
 
 [display]
 

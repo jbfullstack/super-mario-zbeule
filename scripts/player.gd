@@ -65,6 +65,12 @@ var p_meter: float = 0.0
 var facing_dir = -1
 # wye end
 
+#PIPE
+var is_on_top_of_pipe: bool = false
+var top_pipe_height = 0
+var center_of_pipe = 0.0
+var pipe_destination = ""
+
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -78,6 +84,9 @@ func _physics_process(delta):
 		
 	if Input.is_action_just_pressed("shoot") and player_mode == PlayerMode.SHOOTING and !animation.is_shooting:
 		shoot()
+		
+	if Input.is_action_just_pressed("down") and is_on_top_of_pipe:
+		enter_pipe()
 
 	var direction = Input.get_axis("left", "right")
 	if is_on_floor() and abs(velocity.x) >= p_meter_starting_speed and Input.is_action_pressed("shoot"):
@@ -212,3 +221,25 @@ func shoot():
 	fireball.global_position = fire_ball_spawn_point.global_position
 	get_tree().root.add_child(fireball)
 
+func on_top_of_pipe(pipe: Pipe, enter_area: bool):
+	top_pipe_height = pipe.TOP_PIPE_HEIGHT
+	center_of_pipe = pipe.position.x 
+	is_on_top_of_pipe = enter_area
+	pipe_destination = pipe.destination
+	
+func enter_pipe():
+	print("enter the pipe")
+	GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.ENTER_PIPE)
+	set_physics_process(false)
+	is_on_top_of_pipe = false
+	position.x = center_of_pipe
+	var pipe_tween = get_tree().create_tween()
+	pipe_tween.tween_property(self, "position", position + Vector2(0,top_pipe_height), 1)
+	pipe_tween.tween_callback(switch_to_lvl)
+	
+#	set_physics_process(true)
+
+func switch_to_lvl():
+	get_tree().change_scene_to_file(LevelNamesManager.get_scene_path(pipe_destination))
+	LevelNamesManager.last_player_mode = player_mode
+	

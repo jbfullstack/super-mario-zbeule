@@ -122,11 +122,13 @@ script = ExtResource("13_7neyk")
 [node name="yoshiCoin" parent="." instance=ExtResource("14_fallm")]
 position = Vector2(-120, -64)
 
+[node name="pipe3" parent="." instance=ExtResource("17_g403c")]
+position = Vector2(-248, 168)
+
 [node name="pipe2" parent="." instance=ExtResource("17_g403c")]
 position = Vector2(112, -16)
 
-[node name="pipe2" parent="pipe2" instance=ExtResource("17_g403c")]
-position = Vector2(-360, 184)
-
 [node name="pipe1" parent="." instance=ExtResource("17_g403c")]
 position = Vector2(37.229, 16)
+is_traversable = true
+destination = 1

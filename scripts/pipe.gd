@@ -4,6 +4,7 @@ class_name Pipe
 
 
 @export var is_traversable = false
+@export var destination: LevelNamesManager.Levels
 
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var pipe_body_sprite = $pipeBodySprite as Sprite2D
@@ -16,7 +17,8 @@ var BODY_PIPE_WIDTH
 
 var is_computed = false
 
-func _process(delta):
+
+func _process(_delta):
 	_calculate_height_and_adjust_pipe()
 
 func _calculate_height_and_adjust_pipe():
@@ -46,7 +48,7 @@ func _calculate_height_and_adjust_pipe():
 func adjust_pipe(height):
 	var computed_size_x: float = BODY_PIPE_WIDTH 
 	var computed_size_y: float = height - TOP_PIPE_HEIGHT  # Subtract top pipe height
-	var computed_x: float = 0.0 - BODY_PIPE_WIDTH / 2  # Center the pipe horizontally
+	var computed_x: float = BODY_PIPE_WIDTH + (computed_size_y / 2 - (TOP_PIPE_HEIGHT / 2))
 	var computed_y: float = TOP_PIPE_HEIGHT  # Start below the top pipe
 
 	# Adjust the pipe body sprite
@@ -55,7 +57,7 @@ func adjust_pipe(height):
 	pipe_body_sprite.region_rect = region_rect
 
 	# Position the pipe body sprite
-	pipe_body_sprite.position = Vector2(0, computed_y + (computed_size_y / 2 - (TOP_PIPE_HEIGHT / 2)))
+	pipe_body_sprite.position = Vector2(0, computed_x)
 
 	# Adjust the collision shape
 	var shape = RectangleShape2D.new()
@@ -64,3 +66,13 @@ func adjust_pipe(height):
 
 	# Correct the collision shape position
 	collision_shape_2d.position = Vector2(0, (height / 2) - (TOP_PIPE_HEIGHT / 2))
+
+
+func _on_pipe_area_2d_body_entered(body):
+	if is_traversable && body is Player:
+		body.on_top_of_pipe(self, true)
+
+
+func _on_pipe_area_2d_body_exited(body):
+	if is_traversable && body is Player:
+		body.on_top_of_pipe(self, false)

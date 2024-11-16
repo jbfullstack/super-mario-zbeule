@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cqg2ovhu1gnyn"]
+
+[node name="Underground" type="Node"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 768.0
+offset_bottom = 428.0
+color = Color(0, 0, 0, 1)

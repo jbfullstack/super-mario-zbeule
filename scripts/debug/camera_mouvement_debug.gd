@@ -9,10 +9,10 @@ var color: Color
 var default_font : Font = ThemeDB.fallback_font;
 
 func _draw_camera_zone(px: float, py: float, sx: float, sy: float, c: Color):
-	self.posx = posx
-	self.posx = posy
-	self.sizex = sizex
-	self.sizey = sizey
+	self.posx = px
+	self.posx = py
+	self.sizex = sx
+	self.sizey = sy
 	self.color = c
 	queue_redraw()  # Schedule a redraw
 
