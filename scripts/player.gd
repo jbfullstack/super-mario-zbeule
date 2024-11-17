@@ -27,6 +27,7 @@ const FIRE_BALL_SCENE = preload("res://scenes/fire_ball.tscn")
 @onready var fire_ball_spawn_point = $FireBallSpawnPoint
 
 
+
 #@export_group("Locomotion")
 #@export var run_speed_damping = 0.5
 #@export var speed = 75.0
@@ -64,6 +65,9 @@ var is_touchable:bool = true
 var p_meter: float = 0.0
 var facing_dir = -1
 # wye end
+
+var rng = RandomNumberGenerator.new()
+
 
 #PIPE
 var is_on_top_of_pipe: bool = false
@@ -117,7 +121,19 @@ func _physics_process(delta):
 	
 	animation.trigger_animation(velocity, direction, player_mode, is_p_meter() )
 
+	var was_in_air: bool = not is_on_floor()
 	move_and_slide()
+	var just_landed: bool = is_on_floor() and was_in_air
+	
+#	if is_on_floor() and (abs(velocity.x) > 0.0 and rng.randf() <= 0.25) or just_landed:
+	if just_landed:
+		emit_particle()
+
+func emit_particle() -> void:
+	print("EMITING")
+	var particle: CPUParticles2D = get_node("Particle").duplicate()
+	particle.emitting = true
+	add_child(particle)
 
 #func _process(delta):
 #	# camera sync

@@ -5,6 +5,14 @@ var frame_count = 0
 
 var is_shooting = false
 
+
+# animation 
+@onready var base_scale: Vector2 = scale
+@onready var sprite_deform_scale: Vector2 = Vector2(0.8, 1.2)
+
+#func _physics_process(delta):	
+#	scale = lerp(base_scale, base_scale * sprite_deform_scale,  get_parent().velocity.length() / get_parent().max_run_speed)
+
 func trigger_animation(velocity: Vector2, direction: int, player_mode: Player.PlayerMode, is_runing: bool):
 	var animation_prefix = Player.PlayerMode.keys()[player_mode].to_snake_case()
 	
@@ -41,7 +49,13 @@ func trigger_animation(velocity: Vector2, direction: int, player_mode: Player.Pl
 			scale.x = 1
 	else:
 		scale.x = direction
-
+		
+	# squish jump effect
+	if get_parent().velocity.y < 0:
+		scale.y = lerp(base_scale.y, base_scale.y * sprite_deform_scale.y,  get_parent().velocity.length() / get_parent().max_run_speed)
+	elif scale.y != base_scale.y:
+		scale.y = base_scale.y
+		
 func play_shoot():
 	is_shooting = true
 	get_parent().animation.play("shoot")
