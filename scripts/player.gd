@@ -184,8 +184,8 @@ func on_enemy_stomp():
 #	get_tree().root.add_child(points_label)
 #	points_scored.emit(enemy.get_score())
 
-func die():
-	if player_mode == PlayerMode.SMALL:
+func die(instant_death = false):
+	if player_mode == PlayerMode.SMALL || instant_death:
 		is_dead = true
 		GlobalAudioPlayer.stop_music()
 		GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.MARIO_DIE)

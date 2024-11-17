@@ -15,3 +15,6 @@ func _process(delta):
 	super._process(delta)
 	if is_dead:
 		rotate(0.2)
+
+func _on_visible_on_screen_notifier_2d_screen_entered():
+	set_process(true)

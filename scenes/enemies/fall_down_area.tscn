@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://beb73g53j2d1v"]
+
+[ext_resource type="Script" path="res://scripts/fall_down_area.gd" id="1_62xcj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xn02k"]
+size = Vector2(1000, 20)
+
+[node name="fallDownArea" type="Area2D"]
+collision_layer = 16
+collision_mask = 45
+script = ExtResource("1_62xcj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xn02k")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

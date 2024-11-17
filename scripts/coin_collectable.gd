@@ -1,6 +1,7 @@
 extends Bonus
 class_name CoinCollectable
 
+@export var is_floating_animated: bool = true
 var floating_delta: float = 0.15
 var floating_steps: int = 10
 var current_floating_step: int = 0
@@ -16,16 +17,17 @@ func _ready():
 	current_floating_step = floating_offset % floating_steps
 	
 func _process(delta):
-	if current_floating_step < floating_steps:
-		if current_waiting_floating_step == waiting_floating_steps:
-			current_waiting_floating_step = 0
-			current_floating_step += 1
-			position.y -= floating_delta * floating_direction
+	if is_floating_animated:
+		if current_floating_step < floating_steps:
+			if current_waiting_floating_step == waiting_floating_steps:
+				current_waiting_floating_step = 0
+				current_floating_step += 1
+				position.y -= floating_delta * floating_direction
+			else:
+				current_waiting_floating_step += 1
 		else:
-			current_waiting_floating_step += 1
-	else:
-		floating_direction *= -1
-		current_floating_step = 0
+			floating_direction *= -1
+			current_floating_step = 0
 
 func _on_body_entered(body):
 	if body is Player:

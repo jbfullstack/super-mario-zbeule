@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://cildwkmfa3db3"]
+[gd_scene load_steps=23 format=3 uid="uid://cildwkmfa3db3"]
 
 [ext_resource type="Texture2D" uid="uid://bh2i2pbd72n30" path="res://assets/sprites/mario_bros/GroundBlock.png" id="1_1d7cv"]
 [ext_resource type="Script" path="res://scripts/main_lvl_music.gd" id="1_jv122"]
 [ext_resource type="Texture2D" uid="uid://8as4lix1a8pr" path="res://assets/sprites/mario_bros/HardBlock.png" id="2_1vdg3"]
 [ext_resource type="PackedScene" uid="uid://b40pa6oo6dpxx" path="res://scenes/camera_2d.tscn" id="2_ybrf1"]
+[ext_resource type="Texture2D" uid="uid://71rmg0ev1c5n" path="res://assets/sprites/mario_world/background/background_01.png" id="3_8mia7"]
 [ext_resource type="Texture2D" uid="uid://dbhkvad8kmca" path="res://assets/sprites/mario_bros/UndergroundBlock.png" id="3_kj6t6"]
 [ext_resource type="Texture2D" uid="uid://dtkrgfs1x5qrr" path="res://assets/sprites/mario_bros/UndergroundBrick.png" id="4_7aeay"]
 [ext_resource type="PackedScene" uid="uid://c583cac43dgl6" path="res://scenes/player.tscn" id="5_5ysrg"]
@@ -14,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://db4y572gxedcp" path="res://scenes/items/coin_collectable.tscn" id="12_q31i0"]
 [ext_resource type="Script" path="res://scripts/level_manager.gd" id="13_7neyk"]
 [ext_resource type="PackedScene" uid="uid://oc8msym3vsb8" path="res://scenes/items/coin_yoshi.tscn" id="14_fallm"]
+[ext_resource type="PackedScene" uid="uid://beb73g53j2d1v" path="res://scenes/enemies/fall_down_area.tscn" id="16_psdcl"]
 [ext_resource type="PackedScene" uid="uid://b36a5v7tdeqeb" path="res://scenes/items/pipes/green_pipe_vertical.tscn" id="17_g403c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qbv4q"]
@@ -56,6 +58,11 @@ script = ExtResource("1_jv122")
 
 [node name="Camera2D" parent="." instance=ExtResource("2_ybrf1")]
 
+[node name="background" type="Sprite2D" parent="."]
+position = Vector2(200, -88)
+scale = Vector2(1.86861, 1.10573)
+texture = ExtResource("3_8mia7")
+
 [node name="TileMap2" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ou1wn")
 format = 2
@@ -76,14 +83,13 @@ position = Vector2(-136, 8)
 [node name="enemies" type="Node" parent="."]
 
 [node name="koopa" parent="enemies" instance=ExtResource("7_14jb6")]
-position = Vector2(145, -37)
+position = Vector2(152, 32)
 
 [node name="goomba" parent="enemies" instance=ExtResource("5_rpurm")]
-position = Vector2(198, -86)
-horizontal_speed = 0
+position = Vector2(304, 56)
 
 [node name="koopa2" parent="enemies" instance=ExtResource("7_14jb6")]
-position = Vector2(178, -38)
+position = Vector2(288, 32)
 
 [node name="Player" parent="." instance=ExtResource("5_5ysrg")]
 position = Vector2(-186.723, 43.1486)
@@ -91,27 +97,47 @@ position = Vector2(-186.723, 43.1486)
 [node name="coins" type="Node" parent="."]
 
 [node name="CollectableCoin" parent="coins" instance=ExtResource("12_q31i0")]
-position = Vector2(-128, -16)
+position = Vector2(-48, -72)
 
 [node name="CollectableCoin2" parent="coins" instance=ExtResource("12_q31i0")]
-position = Vector2(-112, -16)
+position = Vector2(-32, -80)
 
 [node name="CollectableCoin3" parent="coins" instance=ExtResource("12_q31i0")]
-position = Vector2(-120, -32)
+position = Vector2(-16, -72)
+
+[node name="CollectableCoin4" parent="coins" instance=ExtResource("12_q31i0")]
+position = Vector2(0, -80)
+
+[node name="yoshiCoin" parent="coins" instance=ExtResource("14_fallm")]
+position = Vector2(-16, -96)
+is_floating_animated = false
 
 [node name="levelManager" type="Node" parent="." groups=["level_manager"]]
 script = ExtResource("13_7neyk")
 
-[node name="yoshiCoin" parent="." instance=ExtResource("14_fallm")]
-position = Vector2(-120, -64)
+[node name="Pipe" type="Node" parent="."]
 
-[node name="pipe3" parent="." instance=ExtResource("17_g403c")]
+[node name="pipe3" parent="Pipe" instance=ExtResource("17_g403c")]
 position = Vector2(-248, 168)
 
-[node name="pipe2" parent="." instance=ExtResource("17_g403c")]
+[node name="pipe2" parent="Pipe" instance=ExtResource("17_g403c")]
 position = Vector2(112, -16)
 
-[node name="pipe1" parent="." instance=ExtResource("17_g403c")]
+[node name="pipe1" parent="Pipe" instance=ExtResource("17_g403c")]
 position = Vector2(37.229, 16)
 is_traversable = true
 destination = 1
+
+[node name="fallDownAreas" type="Node" parent="."]
+
+[node name="fallDownArea" parent="fallDownAreas" instance=ExtResource("16_psdcl")]
+position = Vector2(-48, 248)
+scale = Vector2(0.28, 1)
+
+[node name="fallDownArea2" parent="fallDownAreas" instance=ExtResource("16_psdcl")]
+position = Vector2(-512, 248)
+scale = Vector2(0.28, 1)
+
+[node name="fallDownArea3" parent="fallDownAreas" instance=ExtResource("16_psdcl")]
+position = Vector2(536, 248)
+scale = Vector2(0.88, 1)

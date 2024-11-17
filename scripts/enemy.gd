@@ -10,7 +10,9 @@ const POINTS_LABEL_SCENE = preload("res://scenes/points_label.tscn")
 
 @export var is_dead = false
 
-
+func _ready():
+	set_process(false)
+	
 func get_score():
 	return 100
 
@@ -19,6 +21,10 @@ func _process(delta):
 		return
 		
 	position.x -= delta * horizontal_speed
+	if horizontal_speed > 0 && scale.x < 0:
+		scale.x = 1
+	elif horizontal_speed < 0 && scale.x > 0:
+		scale.x = -1
 	
 	if !ray_cast_2d.is_colliding():
 		position.y += delta * vertical_speed
@@ -52,3 +58,9 @@ func die_from_hit():
 func _on_area_entered(area):
 	if area is Koopa and area.isInShell and area.horizontal_speed != 0:
 		self.die_from_hit()
+
+
+func _on_body_entered(body):
+	print("enemie, body entered: ", body)
+	if body is Pipe:
+		horizontal_speed *= -1
