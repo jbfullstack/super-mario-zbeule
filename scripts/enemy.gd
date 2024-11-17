@@ -43,6 +43,7 @@ func die_from_hit():
 	var die_tween = get_tree().create_tween()
 	die_tween.tween_property(self, "position", position + Vector2(0, -25), .2)
 	die_tween.chain().tween_property(self, "position", position + Vector2(0, 500), 4)
+	die_tween.tween_callback(queue_free)
 	
 	var points_label = POINTS_LABEL_SCENE.instantiate()
 	points_label.position = self.position + Vector2(-20, -20)

@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://bbpb00d6j2vqi"]
+
+[ext_resource type="Script" path="res://scripts/koopa.gd" id="1_if8or"]
+[ext_resource type="Texture2D" uid="uid://bvstl76758xyg" path="res://assets/sprites/mario_world/koopa/green/koopa_green_shell1.png" id="2_vjpsr"]
+[ext_resource type="Texture2D" uid="uid://cb6jynfv85ycj" path="res://assets/sprites/mario_world/koopa/green/koopa_green_shell2.png" id="3_v6s2f"]
+[ext_resource type="Texture2D" uid="uid://cq10bnvrhqxbp" path="res://assets/sprites/mario_world/koopa/green/koopa_green_shell3.png" id="4_ktdug"]
+[ext_resource type="Texture2D" uid="uid://cvpvvmao6papm" path="res://assets/sprites/mario_world/koopa/green/koopa_green_shell4.png" id="5_6m2ix"]
+[ext_resource type="Texture2D" uid="uid://ct2yywpeil8f6" path="res://assets/sprites/mario_world/koopa/green/koopa_green_walk1.png" id="6_7ms8r"]
+[ext_resource type="Texture2D" uid="uid://cqvhj2i7hx5bc" path="res://assets/sprites/mario_world/koopa/green/koopa_green_walk2.png" id="7_fn6qo"]
+[ext_resource type="Shape2D" uid="uid://boxtkp0npuv1n" path="res://resources/collision_shapes/koopa_shell_collision_shape.tres" id="8_b20fx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qtnhe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vjpsr")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_v6s2f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ktdug")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_6m2ix")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_vjpsr")
+}],
+"loop": true,
+"name": &"slide",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_7ms8r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fn6qo")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="koopa" type="Area2D"]
+collision_layer = 4
+collision_mask = 73
+script = ExtResource("1_if8or")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qtnhe")
+animation = &"slide"
+autoplay = "walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.25)
+shape = ExtResource("8_b20fx")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+modulate = Color(1, 0.145098, 1, 1)
+self_modulate = Color(0.886275, 0.0745098, 1, 1)
+target_position = Vector2(0, 12)
+collision_mask = 18
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

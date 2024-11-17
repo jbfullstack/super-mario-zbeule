@@ -67,6 +67,9 @@ var facing_dir = -1
 # wye end
 
 var rng = RandomNumberGenerator.new()
+@onready var step_particle = $StepParticle
+@onready var jump_particle = $JumpParticle
+
 
 
 #PIPE
@@ -91,6 +94,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
 		GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.JUMP)
+		emit_particle(jump_particle)
 		
 	if Input.is_action_just_released("jump") and velocity.y < 0:
 		velocity.y *= 0.5
@@ -127,11 +131,11 @@ func _physics_process(delta):
 	
 #	if is_on_floor() and (abs(velocity.x) > 0.0 and rng.randf() <= 0.25) or just_landed:
 	if just_landed:
-		emit_particle()
+		emit_particle(step_particle)
 
-func emit_particle() -> void:
+func emit_particle(p) -> void:
 	print("EMITING")
-	var particle: CPUParticles2D = get_node("Particle").duplicate()
+	var particle: CPUParticles2D = p.duplicate()
 	particle.emitting = true
 	add_child(particle)
 
