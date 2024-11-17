@@ -2,6 +2,8 @@ extends Camera2D
 class_name CameraMouvement
 
 @export_group("level")
+@export var lock: bool = false
+@export var horizontal_sync: bool = true
 @export var vertical_sync: bool = true
 @export_group("")
 
@@ -53,7 +55,7 @@ func _ready():
 	h_direction = sign(player.velocity.x)
 	h_change_pos = player.global_position.x
 	
-	zoom = Vector2(1.0, 1.0)
+#	zoom = Vector2(1.0, 1.0)
 
 func _process(delta):
 	if player == null:
@@ -61,25 +63,27 @@ func _process(delta):
 		
 	handle_zoom()
 		
-	update_horizontal_camera(delta)
-	update_vertical_camera(delta)
+	if !lock:
+		update_horizontal_camera(delta)
+		update_vertical_camera(delta)
 
 func update_horizontal_camera(_delta):
-	var direction = sign(player.velocity.x)
-	if direction != h_direction:
-		PRINT("Player changed direction")
-		h_change_pos = player.global_position.x
-		h_direction = direction
-		
-		
-	if direction != 0:
-		var distance_since_change = abs(player.global_position.x - h_change_pos)
-		if distance_since_change > h_buffer:
+	if horizontal_sync:
+		var direction = sign(player.velocity.x)
+		if direction != h_direction:
+			PRINT("Player changed direction")
+			h_change_pos = player.global_position.x
+			h_direction = direction
 			
-			var target_x = player.global_position.x + (third_tiers_of_viewport_width * direction)
-#			var target_x =  player.global_position.x
-			# move camera again
-			global_position.x = lerp(global_position.x, target_x, 0.05)
+			
+		if direction != 0:
+			var distance_since_change = abs(player.global_position.x - h_change_pos)
+			if distance_since_change > h_buffer:
+				
+				var target_x = player.global_position.x + (third_tiers_of_viewport_width * direction)
+	#			var target_x =  player.global_position.x
+				# move camera again
+				global_position.x = lerp(global_position.x, target_x, 0.05)
 	
 
 func update_vertical_camera(_delta):

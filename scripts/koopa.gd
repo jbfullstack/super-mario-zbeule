@@ -13,10 +13,15 @@ const slide_speed = 200
 @onready var collision_shape_2d = $CollisionShape2D
 var isInShell = false
 
+var is_just_stomped: bool = false
+
 func _ready():
 	ray_cast_2d.exclude_parent = true
 	collision_shape_2d.shape = KOOPA_FULL_COLL_SHAPE
 
+func _process(delta):
+	if is_just_stomped:
+		pass
 
 func die():
 	if !isInShell:
@@ -35,7 +40,9 @@ func on_stomp(player_pos: Vector2):
 	set_collision_layer_value(3, false)
 	set_collision_layer_value(4, true)
 
-	GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.STOMP)	
+	GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.STOMP)
+	
+	is_just_stomped = true
 	
 	var movement_direction = 1 if player_pos.x <= global_position.x else -1
 	horizontal_speed = -movement_direction * slide_speed

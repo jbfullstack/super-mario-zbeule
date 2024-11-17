@@ -1,6 +1,32 @@
 extends Bonus
 class_name CoinCollectable
 
+var floating_delta: float = 0.15
+var floating_steps: int = 10
+var current_floating_step: int = 0
+var current_waiting_floating_step: int = 0
+var waiting_floating_steps: int = 4
+var floating_direction: int = 1
+var floating_offset: int = 0 
+
+func _ready():
+	
+	floating_offset = get_tree().get_first_node_in_group("level_manager").coin_counter_for_animation
+	get_tree().get_first_node_in_group("level_manager").coin_counter_for_animation += 1
+	current_floating_step = floating_offset % floating_steps
+	
+func _process(delta):
+	if current_floating_step < floating_steps:
+		if current_waiting_floating_step == waiting_floating_steps:
+			current_waiting_floating_step = 0
+			current_floating_step += 1
+			position.y -= floating_delta * floating_direction
+		else:
+			current_waiting_floating_step += 1
+	else:
+		floating_direction *= -1
+		current_floating_step = 0
+
 func _on_body_entered(body):
 	if body is Player:
 		set_collision_layer_value(6, false)

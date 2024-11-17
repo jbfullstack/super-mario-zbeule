@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b40pa6oo6dpxx"]
+
+[ext_resource type="Script" path="res://scripts/camera_mouvement.gd" id="1_4v41e"]
+[ext_resource type="PackedScene" uid="uid://c23eh7cwra8x2" path="res://scenes/pause_menu.tscn" id="2_m4up8"]
+[ext_resource type="PackedScene" uid="uid://b5f5l4216u27l" path="res://scenes/debug/camera_mouvements_debug.tscn" id="3_hugbu"]
+
+[node name="Camera2D" type="Camera2D"]
+process_mode = 3
+position = Vector2(0, -104)
+zoom = Vector2(2.75, 2.75)
+position_smoothing_enabled = true
+drag_left_margin = 0.0
+drag_top_margin = 0.0
+drag_right_margin = 0.0
+drag_bottom_margin = 0.0
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource("1_4v41e")
+
+[node name="Pause Menu" parent="." instance=ExtResource("2_m4up8")]
+
+[node name="camera_mouvements_debug" parent="." instance=ExtResource("3_hugbu")]

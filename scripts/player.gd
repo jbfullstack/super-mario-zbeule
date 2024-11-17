@@ -71,6 +71,15 @@ var top_pipe_height = 0
 var center_of_pipe = 0.0
 var pipe_destination = ""
 
+func _ready():
+	if LevelNamesManager.has_return_point():
+		global_position = LevelNamesManager.return_point()
+	player_mode = LevelNamesManager.player_mode()
+	if player_mode == PlayerMode.SMALL:
+		set_collision_shape(true)
+	else:
+		set_collision_shape(false)
+
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -228,7 +237,6 @@ func on_top_of_pipe(pipe: Pipe, enter_area: bool):
 	pipe_destination = pipe.destination
 	
 func enter_pipe():
-	print("enter the pipe")
 	GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.ENTER_PIPE)
 	set_physics_process(false)
 	is_on_top_of_pipe = false
@@ -239,7 +247,16 @@ func enter_pipe():
 	
 #	set_physics_process(true)
 
+func enter_horizontal_pipe(pipe: HorizontalPipe):
+	LevelNamesManager.set_return_point(pipe.destination_position)
+	pipe_destination = pipe.destination_level
+	GlobalAudioPlayer.play_sound(GlobalAudioPlayer.Sounds.ENTER_PIPE)	
+	set_physics_process(false)
+	var pipe_tween = get_tree().create_tween()
+	pipe_tween.tween_property(self, "position", position - Vector2(top_pipe_height, 0), 1)
+	pipe_tween.tween_callback(switch_to_lvl)
+
 func switch_to_lvl():
 	get_tree().change_scene_to_file(LevelNamesManager.get_scene_path(pipe_destination))
-	LevelNamesManager.last_player_mode = player_mode
+	LevelNamesManager.set_player_mode(player_mode)
 	
