@@ -1,10 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://cildwkmfa3db3"]
+[gd_scene load_steps=22 format=3 uid="uid://cildwkmfa3db3"]
 
 [ext_resource type="Texture2D" uid="uid://bh2i2pbd72n30" path="res://assets/sprites/mario_bros/GroundBlock.png" id="1_1d7cv"]
 [ext_resource type="Script" path="res://scripts/main_lvl_music.gd" id="1_jv122"]
 [ext_resource type="Texture2D" uid="uid://8as4lix1a8pr" path="res://assets/sprites/mario_bros/HardBlock.png" id="2_1vdg3"]
 [ext_resource type="PackedScene" uid="uid://b40pa6oo6dpxx" path="res://scenes/camera_2d.tscn" id="2_ybrf1"]
-[ext_resource type="Texture2D" uid="uid://71rmg0ev1c5n" path="res://assets/sprites/mario_world/background/background_01.png" id="3_8mia7"]
 [ext_resource type="Texture2D" uid="uid://dbhkvad8kmca" path="res://assets/sprites/mario_bros/UndergroundBlock.png" id="3_kj6t6"]
 [ext_resource type="Texture2D" uid="uid://dtkrgfs1x5qrr" path="res://assets/sprites/mario_bros/UndergroundBrick.png" id="4_7aeay"]
 [ext_resource type="PackedScene" uid="uid://c583cac43dgl6" path="res://scenes/player.tscn" id="5_5ysrg"]
@@ -57,11 +56,6 @@ sources/3 = SubResource("TileSetAtlasSource_ma2bd")
 script = ExtResource("1_jv122")
 
 [node name="Camera2D" parent="." instance=ExtResource("2_ybrf1")]
-
-[node name="background" type="Sprite2D" parent="."]
-position = Vector2(200, -88)
-scale = Vector2(1.86861, 1.10573)
-texture = ExtResource("3_8mia7")
 
 [node name="TileMap2" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ou1wn")

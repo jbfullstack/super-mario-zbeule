@@ -8,7 +8,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 enum PlayerMode {
 	SMALL,
 	BIG,
-	SHOOTING
+	SHOOTING,
+	HEAVY
 }
 
 #const POINTS_LABEL_SCENE = preload("res://scenes/points_label.tscn")
@@ -131,6 +132,8 @@ func _physics_process(delta):
 	
 #	if is_on_floor() and (abs(velocity.x) > 0.0 and rng.randf() <= 0.25) or just_landed:
 	if just_landed:
+		if player_mode == PlayerMode.HEAVY:
+			get_parent().get_node("Camera2D").shake(0.1, 30, 5)
 		emit_particle(step_particle)
 
 func emit_particle(p) -> void:
@@ -185,6 +188,8 @@ func on_enemy_stomp():
 #	points_scored.emit(enemy.get_score())
 
 func die(instant_death = false):
+	
+	
 	if player_mode == PlayerMode.SMALL || instant_death:
 		is_dead = true
 		GlobalAudioPlayer.stop_music()

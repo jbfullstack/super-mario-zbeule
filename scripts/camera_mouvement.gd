@@ -66,6 +66,8 @@ func _process(delta):
 	if !lock:
 		update_horizontal_camera(delta)
 		update_vertical_camera(delta)
+	
+	handle_shake(delta)
 
 func update_horizontal_camera(_delta):
 	if horizontal_sync:
@@ -148,6 +150,51 @@ func handle_zoom():
 	if zoomed:
 		viewport_width = get_viewport_rect().size.x / zoom.x
 		viewport_height = get_viewport_rect().size.y  / zoom.y
+
+var _timer = 0
+var _last_shook_timer = 0.0
+var _period_in_ms = 0.0
+var _amplitude = 0.0
+var _duration = 0.0
+var _previous_x = 0.0
+var _previous_y = 0.0
+var _last_offset = Vector2(0, 0)
+
+func handle_shake(delta):
+	if _timer == 0:
+		return
+		
+	_last_shook_timer = _last_shook_timer + delta
+	
+	while _last_shook_timer > _period_in_ms:
+		_last_shook_timer = _last_shook_timer - _period_in_ms
+		var intensity = _amplitude * (1 - ((_duration - _timer) / _duration))
+		var new_x = randf_range(-1.0, 1.0)
+		var x_component = intensity * (_previous_x + (delta * (new_x - _previous_x)))
+		var new_y = randf_range(-1.0, 1.0)
+		var y_component = intensity * (_previous_y + (delta * (new_y - _previous_y)))
+		_previous_x = new_x
+		_previous_y = new_y
+		
+		var new_offset = Vector2(x_component, y_component)
+		set_offset(get_offset() - _last_offset + new_offset)
+		_last_offset = new_offset
+		_timer = _timer - delta
+		if _timer <= 0:
+			_timer = 0
+			set_offset(get_offset() - _last_offset)
+			
+func shake(duration, frequency, amplitude):
+	if frequency == 0: return
+	_duration = duration
+	_timer = duration
+	_period_in_ms = 1.0 / frequency
+	_amplitude = amplitude
+	_previous_x =  randf_range(-1.0, 1.0)
+	_previous_y =  randf_range(-1.0, 1.0)
+	set_offset(get_offset() - _last_offset)
+	_last_offset = Vector2(0, 0)
+
 
 func PRINT(msg: String):
 	if debug:
